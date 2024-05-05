@@ -1,0 +1,21 @@
+[
+  {
+    "type": "file",
+    "name": "index",
+    "label": "介绍"
+  },
+  {
+    "type": "dir",
+    "name": "basic",
+    "label": "基础工具",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "utils",
+    "label": "通用工具",
+    "collapsible": true,
+    "collapsed": true
+  }
+]

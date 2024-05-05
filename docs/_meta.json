@@ -1,0 +1,7 @@
+[
+  {
+    "text": "指南",
+    "link": "/guides/index",
+    "activeMatch": "^/guides/"
+  }
+]
