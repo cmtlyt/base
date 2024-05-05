@@ -1,9 +1,5 @@
 [
-  {
-    "type": "file",
-    "name": "index",
-    "label": "介绍"
-  },
+  "index",
   {
     "type": "dir",
     "name": "basic",
