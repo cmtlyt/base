@@ -1,0 +1,15 @@
+/*! react/jsx-runtime */
+
+/*! core-js/modules/es.array.includes.js */
+
+/*! D:\code\@cmtlyt\base\node_modules\.pnpm\rspress-plugin-reading-time@0.3.0_rspress@1.19.1\node_modules\rspress-plugin-reading-time\components\ReadingTime.tsx */
+
+/*! rspress/runtime */
+
+/*! react/jsx-runtime */
+
+/*! ./ReadingTime.less */
+
+/*! @mdx-js/react */
+
+/*! react */
