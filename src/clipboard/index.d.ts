@@ -1,6 +1,6 @@
 interface IClipboard {
   copy: (text: string) => void;
-  paste: () => string;
+  paste: () => Promise<string>;
   clear: () => void;
   isCopyable: boolean;
   isPasteable: boolean;

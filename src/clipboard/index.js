@@ -72,7 +72,7 @@ const copy = cacheByReturn(() => {
 });
 
 /**
- * @returns {string}
+ * @returns {Promise<string>}
  */
 const paste = cacheByReturn(() => {
   if (isPasteable()) {
@@ -87,11 +87,12 @@ const paste = cacheByReturn(() => {
       document.execCommand('paste');
       const text = input.value;
       document.body.removeChild(input);
-      return text;
+      return Promise.resolve(text);
     };
   }
   return () => {
     console.warn('paste not supported');
+    return Promise.reject('paste not supported');
   };
 });
 
