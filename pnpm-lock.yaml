@@ -14,39 +14,48 @@ importers:
       '@babel/preset-env':
         specifier: ^7.24.5
         version: 7.24.5(@babel/core@7.24.5)
+      '@cmtlyt/base':
+        specifier: ./
+        version: 'link:'
       '@rspress/plugin-playground':
         specifier: ^1.19.1
-        version: 1.19.1(@rspress/core@1.19.1)(monaco-editor@0.48.0)(react-dom@18.3.1)(react-router-dom@6.23.0)(react@18.3.1)
+        version: 1.19.1(@rspress/core@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))(monaco-editor@0.48.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@rspress/plugin-preview':
         specifier: ^1.19.1
-        version: 1.19.1(@babel/core@7.24.5)(@rspress/core@1.19.1)(react-router-dom@6.23.0)(react@18.3.1)(solid-js@1.8.17)
+        version: 1.19.1(@babel/core@7.24.5)(@rspress/core@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))(@swc/helpers@0.5.3)(react-router-dom@6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(solid-js@1.8.17)
+      '@types/react':
+        specifier: ^18.3.1
+        version: 18.3.1
       babel-loader:
         specifier: ^9.1.3
-        version: 9.1.3(@babel/core@7.24.5)(webpack@5.91.0)
+        version: 9.1.3(@babel/core@7.24.5)(webpack@5.91.0(webpack-cli@5.1.4))
       copy-webpack-plugin:
         specifier: ^12.0.2
-        version: 12.0.2(webpack@5.91.0)
+        version: 12.0.2(webpack@5.91.0(webpack-cli@5.1.4))
       glob:
         specifier: ^10.3.12
         version: 10.3.12
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
       rspress:
         specifier: ^1.19.1
-        version: 1.19.1(webpack@5.91.0)
+        version: 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
       rspress-plugin-file-tree:
         specifier: ^0.4.0
-        version: 0.4.0(rspress@1.19.1)
+        version: 0.4.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
       rspress-plugin-gh-pages:
         specifier: ^0.3.0
-        version: 0.3.0(rspress@1.19.1)
+        version: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
       rspress-plugin-live2d:
         specifier: ^0.3.0
-        version: 0.3.0(rspress@1.19.1)
+        version: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
       rspress-plugin-reading-time:
         specifier: ^0.3.0
-        version: 0.3.0(rspress@1.19.1)
+        version: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
       terser-webpack-plugin:
         specifier: ^5.3.10
-        version: 5.3.10(webpack@5.91.0)
+        version: 5.3.10(webpack@5.91.0(webpack-cli@5.1.4))
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -3967,7 +3976,7 @@ snapshots:
       react: 18.3.1
       react-is: 16.13.1
 
-  '@mdx-js/loader@2.3.0(webpack@5.91.0)':
+  '@mdx-js/loader@2.3.0(webpack@5.91.0(webpack-cli@5.1.4))':
     dependencies:
       '@mdx-js/mdx': 2.3.0
       source-map: 0.7.4
@@ -4031,7 +4040,7 @@ snapshots:
       monaco-editor: 0.48.0
       state-local: 1.0.7
 
-  '@monaco-editor/react@4.4.6(monaco-editor@0.48.0)(react-dom@18.3.1)(react@18.3.1)':
+  '@monaco-editor/react@4.4.6(monaco-editor@0.48.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@monaco-editor/loader': 1.4.0(monaco-editor@0.48.0)
       monaco-editor: 0.48.0
@@ -4089,10 +4098,10 @@ snapshots:
       '@rspack/core': 0.6.3(@swc/helpers@0.5.3)
       '@swc/helpers': 0.5.3
       core-js: 3.36.1
-      html-webpack-plugin: html-rspack-plugin@5.6.2(@rspack/core@0.6.3)
+      html-webpack-plugin: html-rspack-plugin@5.6.2(@rspack/core@0.6.3(@swc/helpers@0.5.3))
       postcss: 8.4.38
 
-  '@rsbuild/plugin-babel@0.6.7(@rsbuild/core@0.6.7)':
+  '@rsbuild/plugin-babel@0.6.7(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/plugin-proposal-decorators': 7.24.1(@babel/core@7.24.5)
@@ -4106,7 +4115,7 @@ snapshots:
       - '@swc/helpers'
       - supports-color
 
-  '@rsbuild/plugin-react@0.6.7(@rsbuild/core@0.6.7)':
+  '@rsbuild/plugin-react@0.6.7(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)':
     dependencies:
       '@rsbuild/core': 0.6.7
       '@rsbuild/shared': 0.6.7(@swc/helpers@0.5.3)
@@ -4115,10 +4124,10 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@rsbuild/plugin-solid@0.6.7(@babel/core@7.24.5)(@rsbuild/core@0.6.7)(solid-js@1.8.17)':
+  '@rsbuild/plugin-solid@0.6.7(@babel/core@7.24.5)(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)(solid-js@1.8.17)':
     dependencies:
       '@rsbuild/core': 0.6.7
-      '@rsbuild/plugin-babel': 0.6.7(@rsbuild/core@0.6.7)
+      '@rsbuild/plugin-babel': 0.6.7(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)
       '@rsbuild/shared': 0.6.7(@swc/helpers@0.5.3)
       babel-preset-solid: 1.8.17(@babel/core@7.24.5)
       solid-refresh: 0.6.3(solid-js@1.8.17)
@@ -4179,7 +4188,6 @@ snapshots:
     dependencies:
       '@module-federation/runtime-tools': 0.1.6
       '@rspack/binding': 0.6.3
-      '@swc/helpers': 0.5.3
       browserslist: 4.23.0
       enhanced-resolve: 5.12.0
       events: 3.3.0
@@ -4191,20 +4199,22 @@ snapshots:
       webpack-sources: 3.2.3
       zod: 3.23.6
       zod-validation-error: 1.3.1(zod@3.23.6)
+    optionalDependencies:
+      '@swc/helpers': 0.5.3
 
   '@rspack/plugin-react-refresh@0.6.3(react-refresh@0.14.2)':
-    dependencies:
+    optionalDependencies:
       react-refresh: 0.14.2
 
-  '@rspress/core@1.19.1(webpack@5.91.0)':
+  '@rspress/core@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))':
     dependencies:
       '@loadable/component': 5.16.4(react@18.3.1)
-      '@mdx-js/loader': 2.3.0(webpack@5.91.0)
+      '@mdx-js/loader': 2.3.0(webpack@5.91.0(webpack-cli@5.1.4))
       '@mdx-js/mdx': 2.3.0
       '@mdx-js/react': 2.3.0(react@18.3.1)
       '@modern-js/utils': 2.49.2
       '@rsbuild/core': 0.6.7
-      '@rsbuild/plugin-react': 0.6.7(@rsbuild/core@0.6.7)
+      '@rsbuild/plugin-react': 0.6.7(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)
       '@rspress/mdx-rs': 0.5.4
       '@rspress/plugin-auto-nav-sidebar': 1.19.1
       '@rspress/plugin-container-syntax': 1.19.1
@@ -4230,7 +4240,7 @@ snapshots:
       postcss: 8.4.31
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-helmet-async: 1.3.0(react-dom@18.3.1)(react@18.3.1)
+      react-helmet-async: 1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-lazy-with-preload: 2.2.1
       react-syntax-highlighter: 15.5.0(react@18.3.1)
       rehype-external-links: 2.1.0
@@ -4303,15 +4313,15 @@ snapshots:
       '@rspress/runtime': 1.19.1
       medium-zoom: 1.1.0
 
-  '@rspress/plugin-playground@1.19.1(@rspress/core@1.19.1)(monaco-editor@0.48.0)(react-dom@18.3.1)(react-router-dom@6.23.0)(react@18.3.1)':
+  '@rspress/plugin-playground@1.19.1(@rspress/core@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))(monaco-editor@0.48.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@mdx-js/mdx': 2.3.0
-      '@monaco-editor/react': 4.4.6(monaco-editor@0.48.0)(react-dom@18.3.1)(react@18.3.1)
+      '@monaco-editor/react': 4.4.6(monaco-editor@0.48.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@oxidation-compiler/napi': 0.2.0
-      '@rspress/core': 1.19.1(webpack@5.91.0)
+      '@rspress/core': 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
       '@rspress/shared': 1.19.1
       react: 18.3.1
-      react-router-dom: 6.23.0(react-dom@18.3.1)(react@18.3.1)
+      react-router-dom: 6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       remark-gfm: 3.0.1
       rspack-plugin-virtual-module: 0.1.12
     transitivePeerDependencies:
@@ -4319,20 +4329,20 @@ snapshots:
       - react-dom
       - supports-color
 
-  '@rspress/plugin-preview@1.19.1(@babel/core@7.24.5)(@rspress/core@1.19.1)(react-router-dom@6.23.0)(react@18.3.1)(solid-js@1.8.17)':
+  '@rspress/plugin-preview@1.19.1(@babel/core@7.24.5)(@rspress/core@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))(@swc/helpers@0.5.3)(react-router-dom@6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(solid-js@1.8.17)':
     dependencies:
       '@mdx-js/mdx': 2.3.0
       '@rsbuild/core': 0.6.7
-      '@rsbuild/plugin-babel': 0.6.7(@rsbuild/core@0.6.7)
-      '@rsbuild/plugin-react': 0.6.7(@rsbuild/core@0.6.7)
-      '@rsbuild/plugin-solid': 0.6.7(@babel/core@7.24.5)(@rsbuild/core@0.6.7)(solid-js@1.8.17)
-      '@rspress/core': 1.19.1(webpack@5.91.0)
+      '@rsbuild/plugin-babel': 0.6.7(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)
+      '@rsbuild/plugin-react': 0.6.7(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)
+      '@rsbuild/plugin-solid': 0.6.7(@babel/core@7.24.5)(@rsbuild/core@0.6.7)(@swc/helpers@0.5.3)(solid-js@1.8.17)
+      '@rspress/core': 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
       '@rspress/shared': 1.19.1
       '@rspress/theme-default': 1.19.1
       lodash: 4.17.21
       qrcode.react: 3.1.0(react@18.3.1)
       react: 18.3.1
-      react-router-dom: 6.23.0(react-dom@18.3.1)(react@18.3.1)
+      react-router-dom: 6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       remark-gfm: 3.0.1
     transitivePeerDependencies:
       - '@babel/core'
@@ -4345,8 +4355,8 @@ snapshots:
       '@rspress/shared': 1.19.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-helmet-async: 1.3.0(react-dom@18.3.1)(react@18.3.1)
-      react-router-dom: 6.23.0(react-dom@18.3.1)(react@18.3.1)
+      react-helmet-async: 1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-router-dom: 6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@rspress/shared@1.19.1':
     dependencies:
@@ -4375,9 +4385,9 @@ snapshots:
       nprogress: 0.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-helmet-async: 1.3.0(react-dom@18.3.1)(react@18.3.1)
+      react-helmet-async: 1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-syntax-highlighter: 15.5.0(react@18.3.1)
-      react-transition-group: 4.4.5(react-dom@18.3.1)(react@18.3.1)
+      react-transition-group: 4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rspack-plugin-virtual-module: 0.1.12
 
   '@selderee/plugin-htmlparser2@0.11.0':
@@ -4560,17 +4570,17 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.91.0)':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack@5.91.0))(webpack@5.91.0(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.91.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.91.0)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.91.0)':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack@5.91.0))(webpack@5.91.0(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.91.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.91.0)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.91.0)':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.91.0))(webpack@5.91.0(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.91.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.91.0)
@@ -4590,7 +4600,7 @@ snapshots:
   acorn@8.11.3: {}
 
   ajv-formats@2.1.1(ajv@8.13.0):
-    dependencies:
+    optionalDependencies:
       ajv: 8.13.0
 
   ajv-keywords@3.5.2(ajv@6.12.6):
@@ -4653,7 +4663,7 @@ snapshots:
 
   async@3.2.5: {}
 
-  babel-loader@9.1.3(@babel/core@7.24.5)(webpack@5.91.0):
+  babel-loader@9.1.3(@babel/core@7.24.5)(webpack@5.91.0(webpack-cli@5.1.4)):
     dependencies:
       '@babel/core': 7.24.5
       find-cache-dir: 4.0.0
@@ -4823,7 +4833,7 @@ snapshots:
     dependencies:
       toggle-selection: 1.0.6
 
-  copy-webpack-plugin@12.0.2(webpack@5.91.0):
+  copy-webpack-plugin@12.0.2(webpack@5.91.0(webpack-cli@5.1.4)):
     dependencies:
       fast-glob: 3.3.2
       glob-parent: 6.0.2
@@ -5308,11 +5318,12 @@ snapshots:
 
   html-entities@2.5.2: {}
 
-  html-rspack-plugin@5.6.2(@rspack/core@0.6.3):
+  html-rspack-plugin@5.6.2(@rspack/core@0.6.3(@swc/helpers@0.5.3)):
     dependencies:
-      '@rspack/core': 0.6.3(@swc/helpers@0.5.3)
       lodash: 4.17.21
       tapable: 2.2.1
+    optionalDependencies:
+      '@rspack/core': 0.6.3(@swc/helpers@0.5.3)
 
   html-tags@3.3.1: {}
 
@@ -6358,7 +6369,7 @@ snapshots:
 
   react-fast-compare@3.2.2: {}
 
-  react-helmet-async@1.3.0(react-dom@18.3.1)(react@18.3.1):
+  react-helmet-async@1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.5
       invariant: 2.2.4
@@ -6374,7 +6385,7 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-router-dom@6.23.0(react-dom@18.3.1)(react@18.3.1):
+  react-router-dom@6.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@remix-run/router': 1.16.0
       react: 18.3.1
@@ -6395,7 +6406,7 @@ snapshots:
       react: 18.3.1
       refractor: 3.6.0
 
-  react-transition-group@4.4.5(react-dom@18.3.1)(react@18.3.1):
+  react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.5
       dom-helpers: 5.2.1
@@ -6564,7 +6575,7 @@ snapshots:
     dependencies:
       fs-extra: 11.2.0
 
-  rspress-plugin-devkit@0.3.0(rspress@1.19.1):
+  rspress-plugin-devkit@0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))):
     dependencies:
       '@rspress/shared': 1.19.1
       '@types/estree-jsx': 1.0.5
@@ -6579,7 +6590,7 @@ snapshots:
       mdast-util-to-markdown: 1.5.0
       mdast-util-to-string: 4.0.0
       remark-mdc: 1.2.0
-      rspress: 1.19.1(webpack@5.91.0)
+      rspress: 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
       ts-morph: 22.0.0
       unified: 10.1.2
       unist-util-visit: 5.0.0
@@ -6590,46 +6601,46 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  rspress-plugin-file-tree@0.4.0(rspress@1.19.1):
+  rspress-plugin-file-tree@0.4.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))):
     dependencies:
       '@rspress/shared': 1.19.1
-      rspress: 1.19.1(webpack@5.91.0)
-      rspress-plugin-devkit: 0.3.0(rspress@1.19.1)
+      rspress: 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
+      rspress-plugin-devkit: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
     transitivePeerDependencies:
       - supports-color
 
-  rspress-plugin-gh-pages@0.3.0(rspress@1.19.1):
+  rspress-plugin-gh-pages@0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))):
     dependencies:
       '@rspress/shared': 1.19.1
       chalk: 5.3.0
       gh-pages: 6.1.1
-      rspress: 1.19.1(webpack@5.91.0)
-      rspress-plugin-devkit: 0.3.0(rspress@1.19.1)
+      rspress: 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
+      rspress-plugin-devkit: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
     transitivePeerDependencies:
       - supports-color
 
-  rspress-plugin-live2d@0.3.0(rspress@1.19.1):
+  rspress-plugin-live2d@0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))):
     dependencies:
       '@rspress/shared': 1.19.1
       oh-my-live2d: 0.15.2
-      rspress: 1.19.1(webpack@5.91.0)
-      rspress-plugin-devkit: 0.3.0(rspress@1.19.1)
+      rspress: 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
+      rspress-plugin-devkit: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
     transitivePeerDependencies:
       - supports-color
 
-  rspress-plugin-reading-time@0.3.0(rspress@1.19.1):
+  rspress-plugin-reading-time@0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))):
     dependencies:
       '@rspress/shared': 1.19.1
       reading-time: 1.5.0
-      rspress: 1.19.1(webpack@5.91.0)
-      rspress-plugin-devkit: 0.3.0(rspress@1.19.1)
+      rspress: 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
+      rspress-plugin-devkit: 0.3.0(rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)))
     transitivePeerDependencies:
       - supports-color
 
-  rspress@1.19.1(webpack@5.91.0):
+  rspress@1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4)):
     dependencies:
       '@rsbuild/core': 0.6.7
-      '@rspress/core': 1.19.1(webpack@5.91.0)
+      '@rspress/core': 1.19.1(@swc/helpers@0.5.3)(webpack@5.91.0(webpack-cli@5.1.4))
       '@rspress/shared': 1.19.1
       cac: 6.7.14
       chalk: 5.3.0
@@ -6796,7 +6807,7 @@ snapshots:
 
   tapable@2.2.1: {}
 
-  terser-webpack-plugin@5.3.10(webpack@5.91.0):
+  terser-webpack-plugin@5.3.10(webpack@5.91.0(webpack-cli@5.1.4)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
@@ -7020,9 +7031,9 @@ snapshots:
   webpack-cli@5.1.4(webpack@5.91.0):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.91.0)
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.91.0)
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.91.0)
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack@5.91.0))(webpack@5.91.0(webpack-cli@5.1.4))
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack@5.91.0))(webpack@5.91.0(webpack-cli@5.1.4))
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.91.0))(webpack@5.91.0(webpack-cli@5.1.4))
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.3
@@ -7065,10 +7076,11 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(webpack@5.91.0)
+      terser-webpack-plugin: 5.3.10(webpack@5.91.0(webpack-cli@5.1.4))
       watchpack: 2.4.1
-      webpack-cli: 5.1.4(webpack@5.91.0)
       webpack-sources: 3.2.3
+    optionalDependencies:
+      webpack-cli: 5.1.4(webpack@5.91.0)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild

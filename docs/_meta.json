@@ -8,5 +8,10 @@
     "text": "更新日志",
     "link": "/history",
     "activeMatch": "^/history"
+  },
+  {
+    "text": "尝试一下",
+    "link": "/playground",
+    "activeMatch": "^/playground"
   }
 ]
