@@ -2,14 +2,14 @@
 
 /*! react/jsx-runtime */
 
-/*! core-js/modules/es.array.includes.js */
-
 /*! react/jsx-runtime */
+
+/*! core-js/modules/es.array.includes.js */
 
 /*! rspress/runtime */
 
-/*! ./ReadingTime.less */
-
 /*! @mdx-js/react */
+
+/*! ./ReadingTime.less */
 
 /*! /Users/cmtlyt/code/package/base/node_modules/.pnpm/rspress-plugin-reading-time@0.3.0_rspress@1.19.1/node_modules/rspress-plugin-reading-time/components/ReadingTime.tsx */
