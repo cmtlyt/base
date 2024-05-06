@@ -1,0 +1,11 @@
+/*! ./code.raw?raw */
+
+/*! _rspress_playground_imports */
+
+/*! react */
+
+/*! react/jsx-runtime */
+
+/*! ./index.module.scss */
+
+/*! @rspress/plugin-playground/web */

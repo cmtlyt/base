@@ -1,9 +1,0 @@
-/*! react */
-
-/*! react/jsx-runtime */
-
-/*! @rspress/plugin-playground/web */
-
-/*! ./index.module.scss */
-
-/*! _rspress_playground_imports */
