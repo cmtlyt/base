@@ -1,7 +1,3 @@
-type TAnyFunc = (...args: any[]) => any;
-
-type TArgsType<F> = F extends (...args: infer T) => any ? T : any[];
-
 interface IWorkerFuncs<F extends TAnyFunc> {
   run: (...args: TArgsType<F>) => Promise<ReturnType<F>>;
   dispose: () => void;
