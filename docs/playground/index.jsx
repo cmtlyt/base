@@ -5,15 +5,7 @@ import { Runner, Editor } from '@rspress/plugin-playground/web';
 
 import styles from './index.module.scss';
 
-const defaultCode = `import { getRandomString, getArray } from '@cmtlyt/base'
-
-export default function () {
-  const num = getRandomString(8)
-  const arr = getArray(num)
-
-  return <div>{JSON.stringify(arr)}</div>
-}
-`
+import defaultCode from './code.raw?raw';
 
 function Playground() {
   const [code, setCode] = useState(defaultCode);

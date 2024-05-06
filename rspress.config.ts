@@ -32,6 +32,15 @@ export default defineConfig({
     defaultWrapCode: true,
     globalComponents: [],
   },
+  builderConfig: {
+    tools: {
+      rspack: {
+        module: {
+          rules: [{ resourceQuery: /raw/, type: 'asset/source' }],
+        },
+      },
+    },
+  },
   themeConfig: {
     socialLinks: [
       {

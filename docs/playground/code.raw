@@ -1,0 +1,16 @@
+import { useState } from 'react';
+import { getRandomString, getArray } from '@cmtlyt/base';
+
+export default function () {
+  const [test, setTest] = useState(getRandomString(8));
+  const num = getRandomString(8);
+  const arr = getArray(num);
+
+  return (
+    <div>
+      <span>{JSON.stringify(arr)}</span>
+      <br />
+      <button onClick={() => setTest(getRandomString(8))}>{test}</button>
+    </div>
+  );
+}

@@ -11,6 +11,7 @@
     "/*": "./dist/*"
   },
   "scripts": {
+    "build": "npm run build:lib && npm run build:doc",
     "build:lib": "webpack build --config webpack.config.cjs",
     "dev": "rspress dev",
     "build:doc": "rspress build",
