@@ -53,3 +53,32 @@ export function generateCookieInfo(options = {}) {
   }
   return infoString;
 }
+
+/**
+ * @param  {(string|string[]|Record<string, boolean>)[]} args
+ * @returns {string}
+ */
+export function generateClassName(...args) {
+  if (!args.length) return '';
+  const className = args
+    .map((arg) => {
+      if (typeof arg === 'string') {
+        return arg;
+      } else if (Array.isArray(arg)) {
+        return generateClassName(...arg);
+      } else if (typeof arg === 'object') {
+        return Object.keys(arg)
+          .filter((key) => arg[key])
+          .join(' ');
+      } else {
+        return '';
+      }
+    })
+    .join(' ');
+  return className;
+}
+
+/**
+ * @alias generateClassName
+ */
+export const gc = generateClassName;

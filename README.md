@@ -9,6 +9,7 @@
 - (F) 函数
 - (I) 接口
 - (CV) 常量
+- -> 别名
 
 ### v0.3.0
 
@@ -20,6 +21,7 @@
   - (F) remove
 - (D) utils
   - (F) generateCookieInfo
+  - (F) generateClassName -> gc
 
 ### v0.2.0
 

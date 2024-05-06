@@ -9,3 +9,9 @@ export interface ICookieOptions {
 }
 
 export declare function generateCookieInfo(options: ICookieOptions): string;
+
+export declare function generateClassName(
+  ...args: (string | string[] | Record<string, boolean>)[]
+): string;
+
+export declare const gc: typeof generateClassName;
