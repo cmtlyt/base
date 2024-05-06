@@ -61,5 +61,9 @@
     "type": "git",
     "url": "https://github.com/cmtlyt/base"
   },
-  "homepage": "https://cmtlyt.github.io/base/"
+  "homepage": "https://cmtlyt.github.io/base/",
+  "bugs": {
+    "url": "https://github.com/cmtlyt/base/issues",
+    "email": "cmtlyt@163.com"
+  }
 }
