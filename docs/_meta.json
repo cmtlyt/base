@@ -3,5 +3,10 @@
     "text": "指南",
     "link": "/guides/index",
     "activeMatch": "^/guides/"
+  },
+  {
+    "text": "更新日志",
+    "link": "/history",
+    "activeMatch": "^/history"
   }
 ]
