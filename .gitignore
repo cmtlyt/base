@@ -2,3 +2,4 @@ dist/
 .vscode/
 node_modules
 doc_build/
+.DS_Store
