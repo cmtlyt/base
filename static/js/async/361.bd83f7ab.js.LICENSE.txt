@@ -1,17 +1,17 @@
+/*! react */
+
+/*! react/jsx-runtime */
+
+/*! core-js/modules/es.array.includes.js */
+
+/*! @theme */
+
+/*! react/jsx-runtime */
+
 /*! rspress/runtime */
 
 /*! ./ReadingTime.less */
 
-/*! D:\code\@cmtlyt\base\node_modules\.pnpm\rspress-plugin-reading-time@0.3.0_rspress@1.19.1\node_modules\rspress-plugin-reading-time\components\ReadingTime.tsx */
-
-/*! react/jsx-runtime */
-
-/*! @theme */
-
 /*! @mdx-js/react */
 
-/*! react/jsx-runtime */
-
-/*! react */
-
-/*! core-js/modules/es.array.includes.js */
+/*! /Users/cmtlyt/code/package/base/node_modules/.pnpm/rspress-plugin-reading-time@0.3.0_rspress@1.19.1/node_modules/rspress-plugin-reading-time/components/ReadingTime.tsx */
