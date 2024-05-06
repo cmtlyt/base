@@ -32,8 +32,6 @@
 
 /*! ../internals/function-uncurry-this */
 
-/*! ./typeof.js */
-
 /*! ../internals/ordinary-to-primitive */
 
 /*! ../internals/to-string-tag-support */
@@ -134,8 +132,6 @@
 
 /*! ../internals/function-uncurry-this-clause */
 
-/*! ./nonIterableSpread.js */
-
 /*! ../internals/an-object */
 
 /*! ../internals/use-symbol-as-uid */
@@ -167,8 +163,6 @@
 /*! ../internals/object-create */
 
 /*! ../internals/is-object */
-
-/*! ./toPropertyKey.js */
 
 /*! ../internals/is-object */
 
@@ -204,8 +198,6 @@
 
 /*! ../internals/iterator-create-proxy */
 
-/*! ./iterableToArray.js */
-
 /*! ../internals/weak-map-basic-detection */
 
 /*! ../internals/is-null-or-undefined */
@@ -221,8 +213,6 @@
 /*! ../internals/length-of-array-like */
 
 /*! ../internals/an-instance */
-
-/*! ./arrayLikeToArray.js */
 
 /*! ../internals/to-property-key */
 
@@ -287,8 +277,6 @@
 /*! ../internals/inspect-source */
 
 /*! ../internals/a-callable */
-
-/*! ./objectWithoutPropertiesLoose.js */
 
 /*! ../internals/function-uncurry-this */
 
@@ -387,8 +375,6 @@
 /*! ../internals/create-property-descriptor */
 
 /*! ../internals/well-known-symbol */
-
-/*! ./toPrimitive.js */
 
 /*! ../internals/iterator-map */
 
@@ -552,8 +538,6 @@
 
 /*! ../internals/is-symbol */
 
-/*! ./arrayWithoutHoles.js */
-
 /*! ../internals/get-method */
 
 /*! ../internals/object-create */
@@ -566,13 +550,9 @@
 
 /*! ../internals/math-trunc */
 
-/*! ./arrayLikeToArray.js */
-
 /*! ../internals/iterate */
 
 /*! ../internals/create-iter-result-object */
-
-/*! ./setPrototypeOf.js */
 
 /*! ../internals/is-callable */
 
@@ -726,8 +706,6 @@
 
 /*! ../internals/ie8-dom-define */
 
-/*! ./typeof.js */
-
 /*! ../internals/object-is-prototype-of */
 
 /*! ../internals/is-null-or-undefined */
@@ -825,5 +803,3 @@
 /*! ../internals/function-uncurry-this */
 
 /*! ../internals/descriptors */
-
-/*! ./unsupportedIterableToArray.js */
