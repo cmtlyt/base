@@ -1,17 +1,3 @@
-/*! core-js/modules/esnext.async-iterator.find.js */
-
-/*! For license information please see index.js.LICENSE.txt */
-
-/*! core-js/modules/esnext.iterator.find.js */
-
-/*! core-js/modules/esnext.iterator.filter.js */
-
-/*! core-js/modules/esnext.iterator.map.js */
-
-/*! core-js/modules/esnext.async-iterator.map.js */
-
-/*! core-js/modules/web.url-search-params.has.js */
-
 /*! core-js/modules/esnext.async-iterator.every.js */
 
 /*! core-js/modules/esnext.iterator.constructor.js */
@@ -33,3 +19,21 @@
 /*! core-js/modules/esnext.async-iterator.for-each.js */
 
 /*! core-js/modules/es.array.includes.js */
+
+/*! core-js/modules/esnext.async-iterator.find.js */
+
+/*! core-js/modules/esnext.iterator.map.js */
+
+/*! core-js/modules/esnext.iterator.find.js */
+
+/*! core-js/modules/esnext.async-iterator.map.js */
+
+/*! core-js/modules/esnext.iterator.filter.js */
+
+/*! core-js/modules/esnext.iterator.reduce.js */
+
+/*! core-js/modules/esnext.async-iterator.reduce.js */
+
+/*! For license information please see index.js.LICENSE.txt */
+
+/*! core-js/modules/web.url-search-params.has.js */
