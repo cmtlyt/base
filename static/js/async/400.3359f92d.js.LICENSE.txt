@@ -8,8 +8,8 @@
 
 /*! react/jsx-runtime */
 
-/*! rspress/runtime */
-
 /*! core-js/modules/es.array.includes.js */
+
+/*! rspress/runtime */
 
 /*! react/jsx-runtime */

@@ -36,6 +36,8 @@
 
 /*! react */
 
+/*! react */
+
 /*! ./Editor.js */
 
 /*! react */
@@ -53,8 +55,6 @@
 /*! react */
 
 /*! ../utils/compose.js */
-
-/*! @cmtlyt/base */
 
 /*! ../MonacoContainer/index.js */
 
@@ -93,8 +93,6 @@
 /*! ./styles.js */
 
 /*! prop-types */
-
-/*! react */
 
 /*! ../_virtual/_rollupPluginBabelHelpers.js */
 
