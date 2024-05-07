@@ -9,6 +9,37 @@
 - (CV) 常量
 - -> 别名
 
+### v0.4.1
+
+新增
+
+- (D) utils
+  - (F) getType
+
+修改
+
+- `Calculator` 的 `valueOf` 方法改为计算器的等于运算符，并新增 `getCurrValue` 来获取当前值，但不计算最终结果
+
+```js
+// valueOf 会真实计算结果
+const calc = new Calculator(1);
+calc.add(1);
+calc.valueOf(); // 2
+calc.mut(2);
+calc.valueOf(); // 4
+
+// getCurrValue 不会真实计算结果
+const calc2 = new Calculator(1);
+calc.add(1);
+calc.getCurrValue(); // 2;
+calc.mut(2);
+calc.valueOf(); // 3
+```
+
+修复
+
+- 大范围类型修复
+
 ### v0.4.0
 
 新增

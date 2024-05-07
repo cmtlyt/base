@@ -6,9 +6,11 @@
   "module": "./dist/index.js",
   "types": "'./dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "/*": "./dist/*"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./*": "./dist/*"
   },
   "scripts": {
     "preDeploy": "npm run build && git add . && git commit -m",

@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "checkJs": true,
+    "outDir": "dist"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

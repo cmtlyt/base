@@ -43,6 +43,14 @@ export function EventEmitter() {
  *  off: (eventName:string, callback:CallbackFunc)=>EventEmitter,
  *  clear: (eventName:string)=>EventEmitter,
  *  clearAll: ()=>EventEmitter
+ *  getFuncMap: ()=>{
+ *  on: (eventName:string, callback:CallbackFunc)=>EventEmitter,
+ *  emit: (eventName:string, ...args:any)=>EventEmitter,
+ *  once: (eventName:string, callback:CallbackFunc)=>EventEmitter,
+ *  off: (eventName:string, callback:CallbackFunc)=>EventEmitter,
+ *  clear: (eventName:string)=>EventEmitter,
+ *  clearAll: ()=>EventEmitter
+ * }
  * }}
  */
 EventEmitter.prototype = {
@@ -69,7 +77,7 @@ EventEmitter.prototype = {
   },
   once(eventName, callback) {
     const onceCallback = (...args) => {
-      callback(...args);
+      callback.apply(null, args);
       this.off(eventName, onceCallback);
     };
     this.on(eventName, onceCallback);
@@ -88,16 +96,6 @@ EventEmitter.prototype = {
     this.eventMap = {};
     return this;
   },
-  /**
-   * @returns {{
-   *  on: (eventName:string, callback:CallbackFunc)=>EventEmitter,
-   *  emit: (eventName:string, ...args:any)=>EventEmitter,
-   *  once: (eventName:string, callback:CallbackFunc)=>EventEmitter,
-   *  off: (eventName:string, callback:CallbackFunc)=>EventEmitter,
-   *  clear: (eventName:string)=>EventEmitter,
-   *  clearAll: ()=>EventEmitter
-   * }}
-   */
   getFuncMap() {
     return {
       on: this.on.bind(this),
@@ -109,6 +107,8 @@ EventEmitter.prototype = {
     };
   },
 };
+
+EventEmitter.instance = null;
 
 /**
  * @returns {EventEmitter}

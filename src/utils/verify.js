@@ -33,3 +33,13 @@ export function isNumber(value) {
 export function isPromise(value) {
   return value && typeof value.then === 'function';
 }
+
+/**
+ * @param {any} value
+ * @returns {string}
+ */
+export function getType(value) {
+  const baseType = typeof value;
+  if (baseType !== 'object') return baseType;
+  return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+}

@@ -1,72 +1,55 @@
 import { EventEmitter } from '../eventEmitter';
 import { EMPTY } from '../utils/constant';
 
-/**
- * @constructor
- */
-export function DefaultStoreController() {
-  if (new.target !== DefaultStoreController)
-    throw new Error('Cannot construct DefaultController instances directly');
-  this.pool = [];
-  this.itemTotal = 0;
-}
+export class DefaultStoreController {
+  static instance = null;
 
-/**
- * @typedef {{
- *   getId: () => number,
- *   save: (data: any) => number,
- *   get: (id: number) => any,
- *   delete: (id: number) => void,
- *   clear: () => void,
- *   pop: (id: number) => any,
- * }} Controller
- */
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new DefaultStoreController();
+    }
+    return this.instance;
+  }
 
-/** @type {Controller} */
-const handle = {
+  constructor() {
+    this.pool = [];
+    this.itemTotal = 0;
+  }
+
   getId() {
     if (this.itemTotal < this.pool.length) {
       return this.pool.findIndex((item) => item === EMPTY);
     }
     return this.itemTotal;
-  },
+  }
   save(data) {
     const id = this.getId();
     this.pool[id] = data;
     ++this.itemTotal;
     return id;
-  },
+  }
   get(id) {
     if (typeof id !== 'number') return null;
     return this.pool[id] ?? null;
-  },
+  }
   delete(id) {
     if (this.pool[id] !== EMPTY) {
       --this.itemTotal;
       this.pool[id] = EMPTY;
     }
-  },
+  }
   clear() {
     for (let i = 0; i < this.itemTotal; ++i) {
       this.pool[i] = EMPTY;
     }
     this.itemTotal = 0;
-  },
+  }
   pop(id) {
     const data = this.get(id);
     this.delete(id);
     return data;
-  },
-};
-
-DefaultStoreController.getInstance = (() => {
-  let instance = null;
-  return () => {
-    if (instance) return instance;
-    DefaultStoreController.prototype = { ...handle };
-    return (instance = new DefaultStoreController());
-  };
-})();
+  }
+}
 
 /**
  * @typedef {{
@@ -84,7 +67,7 @@ DefaultStoreController.getInstance = (() => {
  */
 
 /**
- * @param {Controller} controller
+ * @param {DefaultStoreController} controller
  * @returns {StorePool}
  */
 export function createStorePool(controller = null) {

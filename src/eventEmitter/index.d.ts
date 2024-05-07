@@ -21,7 +21,7 @@ export declare class EventEmitter {
   ): void;
   public on(eventName: string, callback: TCallback): EventEmitter;
   public off(eventName: string, callback: TCallback): EventEmitter;
-  public emit(eventName: string, event: CustomEvent): EventEmitter;
+  public emit(eventName: string, data: any): EventEmitter;
   public once(eventName: string, callback: TCallback): EventEmitter;
   public clear(eventName: string): EventEmitter;
   public clearAll(): EventEmitter;

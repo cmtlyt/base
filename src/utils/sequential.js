@@ -1,7 +1,7 @@
 import { cacheByReturn } from './cache';
 
 /**
- * @template {(...args:any)=>any} T
+ * @template {(...args:any[])=>void} T
  * @param {T} func
  * @param {number} time
  * @param {boolean} immediately
@@ -10,6 +10,7 @@ import { cacheByReturn } from './cache';
 export function debounce(func, time = 1000, immediately = false) {
   if (time <= 0) return func;
   let timer = null;
+  // @ts-ignore
   return cacheByReturn(() => {
     if (immediately) {
       return (...args) => {
@@ -39,6 +40,7 @@ export function debounce(func, time = 1000, immediately = false) {
 export function throttle(func, time = 100, immediately = true) {
   if (time <= 0) return func;
   let timer = null;
+  // @ts-ignore
   return cacheByReturn(() => {
     if (immediately) {
       return (...args) => {

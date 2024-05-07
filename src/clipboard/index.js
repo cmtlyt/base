@@ -18,34 +18,20 @@ const hasPasteCommand = cacheByReturn(() => {
  * @returns {boolean}
  */
 const isCopyable = cacheByReturn(() => {
-  return (
-    (navigator.clipboard && navigator.clipboard.writeText) ||
-    hasCopyCommand() ||
-    false
-  );
+  return !!navigator.clipboard?.writeText || hasCopyCommand() || false;
 });
 
 /**
  * @returns {boolean}
  */
 const isPasteable = cacheByReturn(() => {
-  return (
-    (navigator.clipboard && navigator.clipboard.readText) ||
-    hasPasteCommand() ||
-    false
-  );
+  return !!navigator.clipboard?.readText || hasPasteCommand() || false;
 });
 
 /**
  * @returns {boolean}
  */
-const isClearable = cacheByReturn(() => {
-  return (
-    (navigator.clipboard && navigator.clipboard.clear) ||
-    hasCopyCommand() ||
-    false
-  );
-});
+const isClearable = isCopyable;
 
 /**
  * @param {string} text
@@ -102,7 +88,7 @@ const paste = cacheByReturn(() => {
 const clear = cacheByReturn(() => {
   if (isClearable()) {
     return () => {
-      navigator.clipboard.clear();
+      navigator.clipboard.writeText('');
     };
   } else if (hasCopyCommand()) {
     return () => {

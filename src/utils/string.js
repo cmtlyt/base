@@ -14,7 +14,7 @@ export function getRandomString(len = 8) {
 
 /**
  * @param {string} resource
- * @returns {URL}
+ * @returns {string}
  */
 export function createLinkByString(resource) {
   const blob = new Blob([resource]);

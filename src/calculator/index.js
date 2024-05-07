@@ -53,7 +53,15 @@ export class Calculator {
   /**
    * @returns {number}
    */
-  valueOf() {
+  getCurrValue() {
     return this.result + this.last;
+  }
+  /**
+   * @returns {number}
+   */
+  valueOf() {
+    this.last = this.result + this.last;
+    this.result = 0;
+    return this.last;
   }
 }

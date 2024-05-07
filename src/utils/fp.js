@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getArray } from './array';
 
 /**
