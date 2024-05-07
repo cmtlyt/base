@@ -1,3 +1,5 @@
+import { isEmpty } from './verify';
+
 /**
  * @param {number} len
  * @returns {string}
@@ -27,14 +29,16 @@ export function createLinkByString(resource) {
  *  duration?: number;
  *  expires?: string | Date;
  *  domain?: string;
+ *  maxAge?: number;
+ *  path?: string;
  * }} CookieOptions
  * @param {CookieOptions} options
  * @returns {string}
  */
 export function generateCookieInfo(options = {}) {
-  const { duration, expires, domain } = options;
+  const { duration, expires, domain, maxAge, path } = options;
   let infoString = '';
-  if (!duration && !expires && !domain) return infoString;
+  if (isEmpty(options)) return infoString;
   if (duration) {
     const date = new Date();
     date.setTime(date.getTime() + duration);
@@ -50,6 +54,12 @@ export function generateCookieInfo(options = {}) {
   }
   if (domain) {
     infoString += `domain=${domain};`;
+  }
+  if (maxAge) {
+    infoString += `max-age=${maxAge};`;
+  }
+  if (path) {
+    infoString += `path=${path};`;
   }
   return infoString;
 }

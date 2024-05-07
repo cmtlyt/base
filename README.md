@@ -13,6 +13,22 @@
 - (CV) 常量
 - -> 别名
 
+### v0.4.2
+
+新增
+
+- (D) utils
+  - (F) isEmpty
+
+修复
+
+- 大范围类型修复
+- 修复 `pipe` 和 `compose` 写反了的问题
+
+修改
+
+- `generateCookieInfo` 增加可配置参数
+
 ### v0.4.1
 
 新增

@@ -6,6 +6,8 @@ export interface ICookieOptions {
   duration?: number;
   expires?: string | Date;
   domain?: string;
+  maxAge?: number;
+  path?: string;
 }
 
 export declare function generateCookieInfo(options: ICookieOptions): string;

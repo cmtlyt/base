@@ -4,7 +4,7 @@
  * @returns {string}
  */
 export function formatDate(date = new Date(), format) {
-  if (!format) return date.valueOf();
+  if (!format) return date.valueOf() + '';
   // todo format
   return date.toLocaleString();
 }

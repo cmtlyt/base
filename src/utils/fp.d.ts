@@ -16,30 +16,30 @@ type TCurryFuncReturnType<F> = F extends TCurry<any, infer R>
 
 type TCompose<T extends TAnyFunc[]> = [
   ...any,
-  any,
-  TFunc<[TCurryFuncReturnType<TLastTwoArg<T>>]>
+  TFunc<[TCurryFuncReturnType<TLastType<T>>]>,
+  any
 ];
 
 type TComposeFunc = <F extends TCompose<F>>(
   ...funcs: F
 ) => (
-  ...args: Required<TArgsType<THeadType<F>>>
-) => TCurryFuncReturnType<TLastType<F>>;
+  ...args: Required<TArgsType<TLastType<F>>>
+) => TCurryFuncReturnType<THeadType<F>>;
 
 // todo 类型存在缺陷，只能判断最后输入的函数是否满足条件，不能判断中间的函数
 export declare const compose: TComposeFunc;
 
 type TPipe<T extends TAnyFunc[]> = [
   ...any,
-  TFunc<[TCurryFuncReturnType<TLastType<T>>]>,
-  any
+  any,
+  TFunc<[TCurryFuncReturnType<TLastTwoArg<T>>]>
 ];
 
 type TPipeFunc = <F extends TPipe<F>>(
   ...funcs: F
 ) => (
-  ...args: Required<TArgsType<TLastType<F>>>
-) => TCurryFuncReturnType<THeadType<F>>;
+  ...args: Required<TArgsType<THeadType<F>>>
+) => TCurryFuncReturnType<TLastType<F>>;
 
 // todo 类型存在缺陷，只能判断最后输入的函数是否满足条件，不能判断中间的函数
 export declare const pipe: TPipeFunc;

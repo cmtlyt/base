@@ -1,0 +1,210 @@
+# 校验相关方法
+
+### isNull
+
+判断是否为 null
+
+**类型声明**
+
+```ts
+function isNull(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isNull } from '@cmtlyt/base';
+// import { isNull } from '@cmtlyt/base/utils/verify';
+
+isNull(null); // true
+isNull(undefined); // true
+isNull(0); // false
+isNull(''); // false
+isNull([]); // false
+isNull({}); // false
+isNull(() => {}); // false
+isNull(Promise.resolve()); // false
+```
+
+### isNaN
+
+判断是否为 NaN
+
+**类型声明**
+
+```ts
+function isNaN(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isNaN } from '@cmtlyt/base';
+// import { isNaN } from '@cmtlyt/base/utils/verify';
+
+isNaN(NaN); // true
+isNaN(undefined); // false
+isNaN(0); // false
+isNaN(''); // false
+isNaN([]); // false
+isNaN({}); // false
+isNaN(() => {}); // false
+isNaN(Promise.resolve()); // false
+```
+
+### isNumber
+
+判断是否为数字
+
+**类型声明**
+
+```ts
+function isNumber(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isNumber } from '@cmtlyt/base';
+// import { isNumber } from '@cmtlyt/base/utils/verify';
+
+isNumber(NaN); // true
+isNumber(undefined); // false
+isNumber(0); // true
+isNumber(''); // false
+isNumber([]); // false
+isNumber({}); // false
+isNumber(() => {}); // false
+isNumber(Promise.resolve()); // false
+```
+
+### isPromise
+
+判断是否为 Promise
+
+**类型声明**
+
+```ts
+function isPromise(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isPromise } from '@cmtlyt/base';
+// import { isPromise } from '@cmtlyt/base/utils/verify';
+
+isPromise(Promise.resolve()); // true
+isPromise(undefined); // false
+isPromise(0); // false
+isPromise(''); // false
+isPromise([]); // false
+isPromise({}); // false
+isPromise(() => {}); // false
+isPromise(NaN); // false
+isPromise({ then() { } }) // true
+```
+
+### getType
+
+获取值类型
+
+**类型声明**
+
+```ts
+function getType(value: any): string;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `string`
+
+**示例**
+
+```ts
+import { getType } from '@cmtlyt/base';
+// import { getType } from '@cmtlyt/base/utils/verify';
+
+getType(NaN); // 'number'
+getType(undefined); // 'undefined'
+getType(0); // 'number'
+getType(''); // 'string'
+getType([]); // 'array'
+getType({}); // 'object'
+getType(() => {}); // 'function'
+getType(Promise.resolve()); // 'promise'
+getType({ then() { } }) // 'object'
+```
+
+### isEmpty
+
+判断是否为空
+
+**类型声明**
+
+```ts
+function isEmpty(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isEmpty } from '@cmtlyt/base';
+// import { isEmpty } from '@cmtlyt/base/utils/verify';
+
+isEmpty(NaN); // true
+isEmpty(undefined); // true
+isEmpty(0); // false
+isEmpty(''); // true
+isEmpty([]); // true
+isEmpty({}); // true
+isEmpty(() => {}); // false
+isEmpty(Promise.resolve()); // false
+isEmpty({ then() { } }) // false
+isEmpty(new Set()) // true
+isEmpty(new Set([1])) // false
+```

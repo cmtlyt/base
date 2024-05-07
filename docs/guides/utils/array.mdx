@@ -1,0 +1,30 @@
+# 数组相关方法
+
+### getArray
+
+参数归一化为数组
+
+**类型声明**
+
+```ts
+function getArray<T>(value: T): T extends any[] ? T : T[];
+```
+
+| 必填 | 参数 | 说明 | 类型 | 默认值 |
+| :-: | --- | --- | --- | --- |
+|  | value | 数组 | any |  |
+
+**返回值**: `array`
+
+**示例**
+
+```ts
+import { getArray } from '@cmtlyt/base';
+// import { getArray } from '@cmtlyt/base/utils/array';
+
+const arr = getArray(1);
+console.log(arr); // [1]
+console.log(getArray([2])); // [2]
+console.log(getArray()); // []
+console.log(getArray({ a: 1 })); // [{ a: 1 }]
+```

@@ -1,12 +1,121 @@
 # 字符串相关方法
 
-```jsx playground
-import {getArray} from '@cmtlyt/base'
+### getRandomString
 
-function App() {
-  console.log(getArray('123'));
-  return <div></div>
+获取指定长度的随机字符串
+
+**类型声明**
+```ts
+function getRandomString(len?: number): string;
+```
+
+| 必填 | 参数 | 说明 | 类型 | 默认值 |
+| :-: | --- | --- | --- | --- |
+|  | len | 字符串长度 | number | 8 |
+
+**返回值**: `string`
+
+**示例**
+
+```js
+import { getRandomString } from '@cmtlyt/base';
+// import { getRandomString } from '@cmtlyt/base/utils/string'
+
+const str = getRandomString(10);
+console.log(str); // a8sdf9aqw1
+```
+
+### createLinkByScript
+
+将传入的字符串转化为 `blob` 地址
+
+**类型声明**
+```ts
+function createLinkByScript(resource: string): string;
+```
+
+| 必填 | 参数 | 说明 | 类型 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | resource | 资源内容 | string | - |
+
+**返回值**: `string`
+
+**示例**
+
+```js
+import { createLinkByScript } from '@cmtlyt/base';
+// import { createLinkByScript } from '@cmtlyt/base/utils/string'
+
+const blobUrl = createLinkByScript('console.log("hello world")');
+console.log(blobUrl); // blob:https://xxxx
+```
+
+### generateCookieInfo
+
+生成 cookie 信息
+
+**类型声明**
+```ts
+interface ICookieOptions {
+  duration?: number;
+  expires?: string | Date;
+  domain?: string;
+  maxAge?: number;
+  path?: string;
 }
 
-export default App
+function generateCookieInfo(options: ICookieOptions): string;
+```
+
+| 必填 | 参数 | 说明 | 类型 | 默认值 |
+| :-: | --- | --- | --- | --- |
+|  | options | cookie 配置 | ICookieOptions | \{} |
+
+**返回值**: `string`
+
+**示例**
+
+```js
+import { generateCookieInfo } from '@cmtlyt/base';
+// import { generateCookieInfo } from '@cmtlyt/base/utils/string'
+
+const cookieInfo = generateCookieInfo({
+  duration: 10,
+  expires: '2023-12-25',
+  domain: 'example.com',
+  maxAge: 10,
+  path: '/',
+});
+console.log(cookieInfo); // "expires=Fri, 25 Dec 2023 00:00:00 GMT;domain=example.com;max-age=10;path=/"
+```
+
+### generateClassName
+
+生成 className
+
+**类型声明**
+```ts
+function generateClassName(
+  ...args: (string | string[] | Record<string, boolean>)[]
+): string;
+
+const gc: typeof generateClassName;
+```
+
+| 必填 | 参数 | 说明 | 类型 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | args | 类名 | string\|string\[]\|Record\<string, boolean> | - |
+
+**返回值**: `string`
+
+**示例**
+
+```js
+import { generateClassName, gc } from '@cmtlyt/base';
+// import { generateClassName, gc } from '@cmtlyt/base/utils/string'
+
+const className = generateClassName('a', 'b', { c: true }, ['d', { e: false, f: true }]);
+const className2 = gc('a', 'b', { c: true }, ['d', { e: false, f: true }]);
+console.log('className:', className); // className: "a b c d f"
+console.log('className2:', className2); // className2: "a b c d f"
 ```

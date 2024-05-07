@@ -48,7 +48,7 @@ function _generateRunFunc(funcs, callback) {
  */
 export function compose(...funcs) {
   return _generateRunFunc(funcs, (funcs, args) =>
-    funcs.reduce((data, func) => func.apply(null, getArray(data)), args)
+    funcs.reduceRight((data, func) => func.apply(null, getArray(data)), args)
   );
 }
 
@@ -59,6 +59,6 @@ export function compose(...funcs) {
  */
 export function pipe(...funcs) {
   return _generateRunFunc(funcs, (funcs, args) =>
-    funcs.reduceRight((data, func) => func.apply(null, getArray(data)), args)
+    funcs.reduce((data, func) => func.apply(null, getArray(data)), args)
   );
 }
