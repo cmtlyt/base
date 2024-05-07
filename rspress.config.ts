@@ -69,7 +69,10 @@ export default defineConfig({
   },
   plugins: [
     pluginPreview({ defaultRenderMode: 'pure' }),
-    pluginPlayground({ defaultRenderMode: 'pure' }),
+    pluginPlayground({
+      defaultRenderMode: 'pure',
+      include: [['@cmtlyt/base', resolve('./dist')]],
+    }),
     readingTime({ defaultLocale: 'zh-CN' }),
     live2d({
       dockedPosition: 'left',
