@@ -36,8 +36,6 @@
 
 /*! react */
 
-/*! react */
-
 /*! ./Editor.js */
 
 /*! react */
@@ -45,6 +43,8 @@
 /*! react/jsx-runtime */
 
 /*! ./Editor/index.js */
+
+/*! /Users/cmtlyt/code/package/base/dist */
 
 /*! ../hooks/useUpdate/index.js */
 
@@ -89,6 +89,8 @@
 /*! ../hooks/usePrevious/index.js */
 
 /*! core-js/modules/es.array.push.js */
+
+/*! react */
 
 /*! ./styles.js */
 
