@@ -1,5 +1,7 @@
 # @cmtlyt/base
 
+> README 每次发包才会更新，如果需要看最新的更新日志或文档，请前往 homepage 查看
+
 ## 更新日志
 
 ### 日志标识总览
@@ -32,10 +34,10 @@ calc.valueOf(); // 4
 
 // getCurrValue 不会真实计算结果
 const calc2 = new Calculator(1);
-calc.add(1);
-calc.getCurrValue(); // 2;
-calc.mut(2);
-calc.valueOf(); // 3
+calc2.add(1);
+calc2.getCurrValue(); // 2;
+calc2.mut(2);
+calc2.valueOf(); // 3
 ```
 
 修复
