@@ -18,7 +18,8 @@
     "build:lib": "webpack build --config webpack.config.cjs",
     "dev": "rspress dev",
     "build:doc": "rspress build",
-    "preview": "rspress preview"
+    "preview": "rspress preview",
+    "test": "vite . --port 8888"
   },
   "keywords": [
     "cmtlyt",
@@ -52,6 +53,7 @@
     "rspress-plugin-reading-time": "^0.3.0",
     "terser-webpack-plugin": "^5.3.10",
     "typescript": "^5.4.5",
+    "vite": "^5.2.11",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   },

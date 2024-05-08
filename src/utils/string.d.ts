@@ -1,6 +1,6 @@
 export declare function getRandomString(len?: number): string;
 
-export declare function createLinkByScript(resource: string): string;
+export declare function createLinkByString(resource: string): string;
 
 export interface ICookieOptions {
   duration?: number;

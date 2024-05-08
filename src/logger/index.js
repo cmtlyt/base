@@ -19,15 +19,16 @@ import { formatDate } from '../utils/date';
  *  warn: ControllerFunc,
  *  error: ControllerFunc,
  *  debug: ControllerFunc,
+ *  onOutput?: (logInfo:LogInfo) => void
  * }} Controller
  * @typedef {(data:any[], moduleId:any, method:string, date:Date) => string | any[]} MessageTemplateFunc
  * @typedef {(message:string) => boolean} IgnoreMessageFunc
  * @typedef {{
- *  showModuleIds: string[],
- *  showMethods: string[],
- *  ignoreMessage: string[] | IgnoreMessageFunc,
- *  messageTemplate: string | MessageTemplateFunc,
- *  controller: Controller,
+ *  showModuleIds?: string[],
+ *  showMethods?: string[],
+ *  ignoreMessage?: string[] | IgnoreMessageFunc,
+ *  messageTemplate?: string | MessageTemplateFunc,
+ *  controller?: Controller,
  * }} LoggerOptions
  * @typedef {{
  *  moduleIdReg: RegExp,
@@ -135,7 +136,6 @@ function getShowMethods(showMethods, controller) {
 
 /**
  * @param {LoggerOptions} options
- * @returns {LoggerOptions}
  */
 function normalizeOptions(options = {}) {
   if (typeof options !== 'object') options = {};
@@ -192,7 +192,7 @@ export class Logger {
     return this._originOptions.showMethods || [...this._showMethods];
   }
   set showMethods(value) {
-    this._originOptions = value;
+    this._originOptions.showMethods = value;
     this._showMethods = getShowMethods(value, this._controller);
   }
   get ignoreMessage() {
@@ -206,7 +206,7 @@ export class Logger {
     return this._originOptions.showModuleIds || [];
   }
   set showModuleIds(value) {
-    this._originOptions.showMethods = value;
+    this._originOptions.showModuleIds = value;
     this._showModuleIds = getArray(value);
   }
   get controller() {

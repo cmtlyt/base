@@ -6,3 +6,4 @@ export * from './calculator';
 export * from './eventEmitter';
 export * from './createStorePool';
 export * from './cookie';
+export * from './createUploader';

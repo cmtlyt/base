@@ -1,3 +1,4 @@
+import { cacheByReturn } from './cache';
 import { EMPTY } from './constant';
 
 /**
@@ -61,4 +62,65 @@ export function isEmpty(value) {
     return Object.keys(value).length === 0;
   }
   return isNull(value) || !value;
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export const isFile = cacheByReturn(() => {
+  if (!File) return false;
+  if (File.prototype.isPrototypeOf) {
+    return (value) => File.prototype.isPrototypeOf(value);
+  }
+  return (value) => value instanceof File;
+});
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export const isBlob = cacheByReturn(() => {
+  if (!Blob) return false;
+  if (Blob.prototype.isPrototypeOf) {
+    return (value) => Blob.prototype.isPrototypeOf(value);
+  }
+  return (value) => value instanceof Blob;
+});
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isHttpUrlString(value) {
+  return typeof value === 'string' && /^https?:\/\//.test(value);
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isBlobUrlString(value) {
+  return typeof value === 'string' && /^blob:/.test(value);
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isDataUrlString(value) {
+  return typeof value === 'string' && /^data:/.test(value);
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isUrl(value) {
+  return (
+    value instanceof URL ||
+    isHttpUrlString(value) ||
+    isBlobUrlString(value) ||
+    isDataUrlString(value)
+  );
 }

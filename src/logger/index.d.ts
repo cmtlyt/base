@@ -55,30 +55,6 @@ interface LoggerFuncMaps {
 
 type ModuleId = unknown;
 
-declare const CONSTAN: Constant;
-
-declare function checkController(controller?: Controller): boolean;
-
-declare function getController(
-  controller: Controller,
-  backController?: Controller
-): Controller;
-
-declare function getMessageTemplate(
-  messageTemplate: string | MessageTemplateFunc
-): MessageTemplateFunc;
-
-declare function getIgnoreMessage(
-  ignoreMessage: string[] | IgnoreMessageFunc
-): IgnoreMessageFunc;
-
-declare function getShowMethods(
-  showMethods: string[],
-  controller: Controller
-): string[];
-
-declare function normalizeOptions(options: LoggerOptions): LoggerOptions;
-
 export declare class Logger {
   constructor(options?: LoggerOptions);
 

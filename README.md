@@ -13,6 +13,35 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.0
+
+新增
+
+- (F) createUploader
+- (D) utils
+  - (F) isFile
+  - (F) isBlob
+  - (F) isHttpUrlString
+  - (F) isBlobUrlString
+  - (F) isDataUrlString
+  - (F) isUrl
+  - (F) getArraySlice
+
+修复
+
+- `logger` 类型错误，及内部参数赋值错误
+- `string` 模块类型修复
+- 移除多余类型声明
+- `createWorkerFunc` 类型完善
+
+新增
+
+- `createWorkerFunc` 监听用户自己发送的事件
+
+备注
+
+- 如果 `createWorkerFunc` 第三个参数的 `needPost` 配置项被设置为 `true` 后，会改变 `func` 的第一个参数为 `postMessage` 函数，如果需要使用，请注意！！！
+
 ### v0.4.2
 
 新增

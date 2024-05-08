@@ -25,13 +25,13 @@ const str = getRandomString(10);
 console.log(str); // a8sdf9aqw1
 ```
 
-### createLinkByScript
+### createLinkByString
 
 将传入的字符串转化为 `blob` 地址
 
 **类型声明**
 ```ts
-function createLinkByScript(resource: string): string;
+function createLinkByString(resource: string): string;
 ```
 
 | 必填 | 参数 | 说明 | 类型 | 默认值 |
@@ -43,10 +43,10 @@ function createLinkByScript(resource: string): string;
 **示例**
 
 ```js
-import { createLinkByScript } from '@cmtlyt/base';
-// import { createLinkByScript } from '@cmtlyt/base/utils/string'
+import { createLinkByString } from '@cmtlyt/base';
+// import { createLinkByString } from '@cmtlyt/base/utils/string'
 
-const blobUrl = createLinkByScript('console.log("hello world")');
+const blobUrl = createLinkByString('console.log("hello world")');
 console.log(blobUrl); // blob:https://xxxx
 ```
 
