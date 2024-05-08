@@ -93,7 +93,10 @@ export const isBlob = cacheByReturn(() => {
  * @returns {boolean}
  */
 export function isHttpUrlString(value) {
-  return typeof value === 'string' && /^https?:\/\//.test(value);
+  return (
+    typeof value === 'string' &&
+    (/^https?:\/\//.test(value) || /^\/\//.test(value))
+  );
 }
 
 /**

@@ -208,3 +208,195 @@ isEmpty({ then() { } }) // false
 isEmpty(new Set()) // true
 isEmpty(new Set([1])) // false
 ```
+
+### isFile
+
+判断是否为文件
+
+**类型声明**
+
+```ts
+function isFile(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isFile } from '@cmtlyt/base';
+// import { isFile } from '@cmtlyt/base/utils/verify';
+
+isFile(new File([], 'test.txt')); // true
+isFile(new Blob([], { type: 'text/plain' })); // false
+```
+
+### isBlob
+
+判断是否为 Blob
+
+**类型声明**
+
+```ts
+function isBlob(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isBlob } from '@cmtlyt/base';
+// import { isBlob } from '@cmtlyt/base/utils/verify';
+
+isBlob(new File([], 'test.txt')); // false
+isBlob(new Blob([], { type: 'text/plain' })); // true
+```
+
+### isHttpUrlString
+
+判断是否为 http 链接字符串
+
+**类型声明**
+
+```ts
+function isHttpUrlString(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isHttpUrlString } from '@cmtlyt/base';
+// import { isHttpUrlString } from '@cmtlyt/base/utils/verify';
+
+isHttpUrlString('https://cmtlyt.com'); // true
+isHttpUrlString('http://cmtlyt.com'); // true
+isHttpUrlString('//cmtlyt.com'); // true
+isHttpUrlString('ftp://cmtlyt.com'); // false
+isHttpUrlString('file://cmtlyt.com'); // false
+isHttpUrlString('mailto://cmtlyt.com'); // false
+isHttpUrlString('tel://cmtlyt.com'); // false
+isHttpUrlString('data://cmtlyt.com'); // false
+```
+
+### isBlobUrlString
+
+判断是否为 blob 链接字符串
+
+**类型声明**
+
+```ts
+function isBlobUrlString(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isBlobUrlString } from '@cmtlyt/base';
+// import { isBlobUrlString } from '@cmtlyt/base/utils/verify';
+
+isBlobUrlString('blob:https://cmtlyt.com'); // true
+isBlobUrlString('blob:http://cmtlyt.com'); // true
+isBlobUrlString('blob://cmtlyt.com'); // true
+isBlobUrlString('blob:ftp://cmtlyt.com'); // true
+isBlobUrlString('blob:file://cmtlyt.com'); // true
+isBlobUrlString('mailto://cmtlyt.com'); // false
+isBlobUrlString('tel://cmtlyt.com'); // false
+isBlobUrlString('data://cmtlyt.com'); // false
+```
+
+### isDataUrlString
+
+判断是否为 data 链接字符串
+
+**类型声明**
+
+```ts
+function isDataUrlString(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+```ts
+import { isDataUrlString } from '@cmtlyt/base';
+// import { isDataUrlString } from '@cmtlyt/base/utils/verify';
+
+isDataUrlString('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'); // true
+```
+
+### isUrl
+
+判断是否为 url
+
+**类型声明**
+
+```ts
+function isUrl(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述 | 默认值 |
+| :-: | --- | --- | --- | --- |
+| * | value | any | 待判断的值 | - |
+
+**返回值**: `boolean`
+
+**示例**
+```ts
+import { isUrl } from '@cmtlyt/base';
+// import { isUrl } from '@cmtlyt/base/utils/verify';
+
+isUrl('https://cmtlyt.com'); // true
+isUrl('http://cmtlyt.com'); // true
+isUrl('//cmtlyt.com'); // true
+isUrl('ftp://cmtlyt.com'); // false
+isUrl('file://cmtlyt.com'); // false
+isUrl('mailto://cmtlyt.com'); // false
+isUrl('tel://cmtlyt.com'); // false
+isUrl('data://cmtlyt.com'); // true
+isUrl('blob:https://cmtlyt.com'); // true
+isUrl('blob:http://cmtlyt.com'); // true
+isUrl('blob://cmtlyt.com'); // true
+isUrl('blob:ftp://cmtlyt.com'); // true
+isUrl('blob:file://cmtlyt.com'); // true
+isUrl('mailto://cmtlyt.com'); // false
+isUrl('tel://cmtlyt.com'); // false
+isUrl('data://cmtlyt.com'); // true
+isUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'); // true
+```
