@@ -1,4 +1,4 @@
-interface IUploadOptions {
+interface IUploadControllerOptions {
   url: string;
   maxConcurrent?: number;
   chunkSize?: number;
@@ -14,6 +14,7 @@ interface IUploadOptions {
   bodyHandler?: (body: {
     chunk: Blob;
     chunkIdx: number;
+    customOption: any;
   }) => Record<string, any>;
 }
 
@@ -24,33 +25,38 @@ interface IUploadFinishInfo {
   errorChunks: number[];
 }
 
+interface IUploadResult {
+  taskInfo: IUploadFinishInfo;
+  customOption: any;
+}
+
 interface IProgressInfo {
   status: 'success' | 'fail' | 'error';
   chunkIdx: number;
   response: any;
 }
 
+interface IUploadOptions {
+  onProgress?: (progressInfo: IProgressInfo) => void;
+  customOption?: any;
+}
+
 type TFileLive = File | Blob | string;
 
 declare class UploadController {
-  constructor(options: IUploadOptions);
+  constructor(options: IUploadControllerOptions);
 
-  upload(
-    file: TFileLive,
-    options?: { onProgress?: (progressInfo: number) => void }
-  ): Promise<IUploadFinishInfo>;
+  upload(file: TFileLive, options?: IUploadOptions): Promise<IUploadResult>;
   retry(
     file: TFileLive,
-    options?: {
-      onProgress?: (progressInfo: number) => void;
-      chunkIdxs?: number[];
-    }
-  ): void;
+    chunkIdxs?: number[],
+    options?: IUploadOptions
+  ): Promise<IUploadResult>;
   abort(file: TFileLive): void;
   clear(): void;
   close(): void;
 }
 
 export declare function createUploader(
-  options: IUploadOptions
+  options: IUploadControllerOptions
 ): UploadController;

@@ -1,1 +1,1 @@
-export declare const EMPTY: Symbol | Object;
+export declare const EMPTY: symbol | Object;

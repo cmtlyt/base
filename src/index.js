@@ -7,3 +7,4 @@ export * from './eventEmitter';
 export * from './createStorePool';
 export * from './cookie';
 export * from './createUploader';
+export * from './createPool';

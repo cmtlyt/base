@@ -1,5 +1,6 @@
+import { createPool } from '../createPool';
 import { createWorkerFunc } from '../createWorkerFunc';
-import { createLinkByString, getArraySlice } from '../utils';
+import { createLinkByString, getArraySlice, getRandomString } from '../utils';
 import { getType, isBlob, isFile, isUrl } from '../utils/verify';
 
 /**
@@ -17,6 +18,10 @@ import { getType, isBlob, isFile, isUrl } from '../utils/verify';
  * }} UploadOptions
  * @typedef {File|Blob|string} FileLive
  * @typedef {{
+ *  uploadInfo:{
+ *   id:string;
+ *   customOption:any;
+ *  };
  *  fileUrl: string;
  *  chunkIdxInfo: [number,number];
  *  chunkSize: number;
@@ -140,6 +145,7 @@ function normalizeOptions(options) {
  * @returns {Promise<UploadFinishInfo>}
  */
 const _uploadHandle = async ({
+  uploadInfo,
   fileUrl,
   chunkIdxInfo,
   chunkSize,
@@ -199,9 +205,14 @@ const _uploadHandle = async ({
   /** @param {Error} err */
   const fetchErrorHandle = (idx, err) => {
     errorIdxs.push(idx);
-    self.postMessage({ chunkIdx: idx, status: 'error', message: err });
+    self.postMessage({
+      chunkIdx: idx,
+      status: 'error',
+      message: err,
+      uploadInfo,
+    });
   };
-  /** @type {(options:{ chunk: Blob, chunkIdx: number }) => Promise<Record<string,any>>} */
+  /** @type {(options:{ chunk: Blob, chunkIdx: number, customOption: any }) => Promise<Record<string,any>>} */
   // @ts-ignore
   const _userBodyHandler = userBodyHandler || (() => {});
   // 表单请求体处理
@@ -211,7 +222,11 @@ const _uploadHandle = async ({
     const formData = new FormData();
     formData.append(dataKey, chunk);
     formData.append('chunkIdx', idx + '');
-    const extendData = await _userBodyHandler({ chunk, chunkIdx: idx });
+    const extendData = await _userBodyHandler({
+      chunk,
+      chunkIdx: idx,
+      customOption: uploadInfo.customOption,
+    });
     if (typeof extendData === 'object') {
       Object.keys(extendData).forEach((key) => {
         formData.append(key, extendData[key]);
@@ -334,12 +349,13 @@ class UploadController {
     this._originOptions = options;
     this._uploadQueue = [];
     this._status = UPLOAD_CONTROLLER_STATUS.waiting;
-    this._finishInfo = [];
+    this._finishInfoMap = {};
     const workerUtilsLink = _workerUtilsGenerate({ bodyHandler });
-    console.log(workerUtilsLink);
-    /** @type {UploaderWorkerController[]} */
-    this._uploadWorkers = Array.from({ length: this._maxConcurrent }, () =>
-      createWorkerFunc(_uploadHandle, [workerUtilsLink], { reuse: false })
+    this._uploadWorkerPool = createPool(
+      () =>
+        createWorkerFunc(_uploadHandle, [workerUtilsLink], { reuse: false }),
+      this._maxConcurrent,
+      Symbol('uploader')
     );
   }
 
@@ -351,22 +367,28 @@ class UploadController {
     progressCallback(progressInfo);
   }
   /**
-   * @param {(data:{
-   *  workerIdx: number;
-   *  data: UploadFinishInfo;
-   * }[])=>void} resolve
-   * @param {number} needWorkerCount
-   * @param {number} workerIdx
+   * @param {(data: {
+   *  taskInfo:{ data: UploadFinishInfo; }[],
+   *  customOption:any
+   * })=>void} resolve
+   * @param {{id:string,workerTotal:number,customOption:any}} uploadInfo
    * @param {UploadFinishInfo} res
    */
-  async _workerResolve(resolve, needWorkerCount, workerIdx, res) {
-    this._finishInfo.push({ workerIdx, data: res });
-    if (this._finishInfo.length === needWorkerCount) {
-      resolve(this._finishInfo);
-      this._finishInfo = [];
+  async _workerResolve(resolve, uploadInfo, res) {
+    const { id, workerTotal } = uploadInfo;
+    const finishInfo = this._finishInfoMap[id];
+    finishInfo.push({ data: res });
+    if (finishInfo.length === workerTotal) {
+      resolve({ taskInfo: finishInfo, customOption: uploadInfo.customOption });
+      delete this._finishInfoMap[id];
+      // 如果没有
+      if (!Object.keys(this._finishInfoMap)) {
+        this._status = UPLOAD_CONTROLLER_STATUS.waiting;
+      }
     }
   }
   async _runWorker({
+    uploadInfo,
     fileUrl,
     start,
     end,
@@ -374,11 +396,10 @@ class UploadController {
     worker,
     resolve,
     reject,
-    needWorkerCount,
-    idx,
     chunkIdxs = [],
   }) {
     const task = {
+      uploadInfo,
       chunkIdxs,
       fileUrl,
       /** @type {[number,number]} */
@@ -394,23 +415,18 @@ class UploadController {
     };
     const onMessage = this._onProgress.bind(this, onProgress);
     worker.on(onMessage);
-    worker
+    return worker
       .run(task)
-      .then(
-        this._workerResolve.bind(this, resolve, needWorkerCount, idx),
-        reject
-      )
+      .then(this._workerResolve.bind(this, resolve, uploadInfo), reject)
       .finally(() => {
         worker.remove(onMessage);
-        this._status = UPLOAD_CONTROLLER_STATUS.waiting;
         this._runTask();
       });
   }
   async _runTask() {
     if (this._status === UPLOAD_CONTROLLER_STATUS.closed) return;
-    if (this._status === UPLOAD_CONTROLLER_STATUS.uploading) return;
     if (this._uploadQueue.length === 0) return;
-    if (this._uploadWorkers.length === 0) return;
+    if (this._uploadWorkerPool.usableCount === 0) return;
 
     this._status = UPLOAD_CONTROLLER_STATUS.uploading;
     const {
@@ -419,44 +435,57 @@ class UploadController {
       reject,
       chunkIdxs = [],
       onProgress = () => {},
+      customOption = {},
     } = this._uploadQueue.shift();
     const file = await _getFile(_templateFile);
     const fileUrl = URL.createObjectURL(file);
+    // 总chunk数量
     const chunkTotal =
       this._chunkSize <= 0 ? 1 : Math.ceil(file.size / this._chunkSize);
+    // 每个worker处理的chunk数量
     const taskChunkSize = Math.ceil(chunkTotal / this._maxConcurrent);
-    const needWorkerCount = Math.ceil(chunkTotal / taskChunkSize);
     const retryChunksMap = getArraySlice(chunkIdxs, this._maxConcurrent);
 
+    const uploadInfo = {
+      id: getRandomString(32),
+      workerTotal: retryChunksMap.length || this._maxConcurrent,
+      customOption,
+    };
+
+    this._finishInfoMap[uploadInfo.id] = [];
+
     const runWorkerBaseData = {
+      uploadInfo,
       fileUrl,
       onProgress,
       resolve,
       reject,
-      needWorkerCount,
     };
 
     if (retryChunksMap.length) {
-      retryChunksMap.forEach((chunkIdxs, idx) => {
-        const worker = this._uploadWorkers[idx];
+      for (const idx in retryChunksMap) {
+        const poolItem = await this._uploadWorkerPool.get();
         this._runWorker({
-          chunkIdxs,
+          chunkIdxs: retryChunksMap[idx],
           start: 0,
           end: 0,
-          idx,
-          worker,
+          worker: poolItem.data,
           ...runWorkerBaseData,
         });
-      });
+      }
       return;
     }
 
-    const runningCount = Math.min(needWorkerCount, this._uploadWorkers.length);
-    for (let idx = 0; idx < runningCount; ++idx) {
-      const worker = this._uploadWorkers[idx];
+    for (let idx = 0; idx < this._maxConcurrent; ++idx) {
+      const poolItem = await this._uploadWorkerPool.get();
       const start = idx * taskChunkSize;
       const end = Math.min(chunkTotal, start + taskChunkSize);
-      this._runWorker({ start, end, idx, worker, ...runWorkerBaseData });
+      this._runWorker({
+        start,
+        end,
+        worker: poolItem.data,
+        ...runWorkerBaseData,
+      });
     }
   }
   /**
@@ -465,12 +494,23 @@ class UploadController {
    * @param {{
    *  onProgress: (progress: UploadProgressInfo)=>void
    *  chunkIdxs: number[]
+   *  customOption: any
    * }} options
    * @returns
    */
-  async _createUploadTask(file, { onProgress = () => {}, chunkIdxs = [] }) {
+  async _createUploadTask(
+    file,
+    { onProgress = () => {}, chunkIdxs = [], customOption }
+  ) {
     return new Promise((resolve, reject) => {
-      this._uploadQueue.push({ file, onProgress, chunkIdxs, resolve, reject });
+      this._uploadQueue.push({
+        file,
+        onProgress,
+        chunkIdxs,
+        resolve,
+        reject,
+        customOption,
+      });
       this._runTask();
     });
   }
@@ -479,22 +519,24 @@ class UploadController {
    * @param {number[]} chunkIdxs
    * @param {{
    *  onProgress: (progress: UploadProgressInfo)=>void
+   *  customOption: any
    * }} options
    * @returns
    */
   retry(file, chunkIdxs, options) {
-    return this._createUploadTask(file, { chunkIdxs, ...options });
+    return this._createUploadTask(file, { ...options, chunkIdxs });
   }
   /**
    * @param {FileLive} file
    * @param {{
    *  onProgress: (progress: UploadProgressInfo)=>void
+   *  customOption: any
    * }} options
    * @returns {Promise<UploadFinishInfo>}
    */
-  upload(file, { onProgress = () => {} }) {
+  upload(file, options) {
     if (this._status === UPLOAD_CONTROLLER_STATUS.closed) return;
-    return this._createUploadTask(file, { onProgress, chunkIdxs: [] });
+    return this._createUploadTask(file, { ...options, chunkIdxs: [] });
   }
   /**
    * @param {FileLive} file
@@ -509,7 +551,7 @@ class UploadController {
   }
   close() {
     this._status = UPLOAD_CONTROLLER_STATUS.closed;
-    this._uploadWorkers.forEach((worker) => worker.dispose());
+    this._uploadWorkerPool.close((worker) => worker.dispose());
   }
 }
 /**
