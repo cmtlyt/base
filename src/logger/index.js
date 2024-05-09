@@ -160,6 +160,17 @@ function normalizeOptions(options = {}) {
 }
 
 export class Logger {
+  /** @type {Logger} */
+  static instance = null;
+
+  /**
+   * @param {LoggerOptions} options
+   * @returns {Logger}
+   */
+  static getInstance(options) {
+    return (Logger.instance ??= new Logger(options));
+  }
+
   /**
    * @param {LoggerOptions} options
    */

@@ -1,16 +1,17 @@
-export declare class Calculator {
-  private result: number;
-  private last: number;
+type TCalcNumber = number | Calculator;
 
-  constructor(initValue?: number);
+export declare class Calculator {
+  constructor(initValue?: TCalcNumber);
 
   static group(
-    func: (calc: Calculator) => void | Calculator | number,
+    func: (calc: Calculator) => void | TCalcNumber,
     initValue?: number
-  ): Calculator | number;
-  public add(value: number): Calculator;
-  public sub(value: number): Calculator;
-  public mut(value: number): Calculator;
-  public div(value: number): Calculator;
-  public valueOf(): number;
+  ): TCalcNumber;
+
+  add(value: TCalcNumber): Calculator;
+  sub(value: TCalcNumber): Calculator;
+  mut(value: TCalcNumber): Calculator;
+  div(value: TCalcNumber): Calculator;
+  getCurrValue(): number;
+  valueOf(): number;
 }

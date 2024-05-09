@@ -1,6 +1,6 @@
 # 缓存相关方法
 
-### cacheByReturn
+## cacheByReturn
 
 缓存函数返回值
 
@@ -18,9 +18,11 @@ function cacheByReturn<F extends () => any>(
 ): TCacheByReturnType<F>;
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | cacheLoad | 缓存加载函数 | F | - |
+**参数**
+
+| 必填 | 参数      | 说明         | 类型 | 默认值 |
+| :--: | --------- | ------------ | ---- | ------ |
+|  \*  | cacheLoad | 缓存加载函数 | F    | -      |
 
 **返回值**: `TCacheByReturnType<F>`
 
@@ -29,7 +31,7 @@ function cacheByReturn<F extends () => any>(
 ```ts
 import { cacheByReturn } from '@ali/ecsf-utils';
 const cacheLoad = () => {
-  console.log('cacheLoad')
+  console.log('cacheLoad');
   return 'hello world';
 };
 const cachedLoad = cacheByReturn(cacheLoad);

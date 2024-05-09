@@ -1,6 +1,6 @@
 # 时序相关方法
 
-### debounce
+## debounce
 
 函数防抖
 
@@ -18,18 +18,18 @@ function debounce<F extends (...args: any[]) => any>(
 
 **参数**
 
-| 必填 | 参数名 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | func | 要防抖的函数 | F | - |
-|  | time | 防抖时间，默认为 100ms | number | 100 |
-|  | immediately | 是否立即执行，默认为 false | boolean | false |
+| 必填 | 参数名      | 说明                       | 类型    | 默认值 |
+| :--: | ----------- | -------------------------- | ------- | ------ |
+|  \*  | func        | 要防抖的函数               | F       | -      |
+|      | time        | 防抖时间，默认为 100ms     | number  | 100    |
+|      | immediately | 是否立即执行，默认为 false | boolean | false  |
 
 **返回值**: `(...args: TArgsType<F>) => void`
 
 **示例**
 
 ```ts
-import { debounce } from '@cmtlyt/base'
+import { debounce } from '@cmtlyt/base';
 // import { debounce } from '@cmtlyt/base/utils/sequential'
 
 const fn = debounce(() => {
@@ -46,7 +46,7 @@ setTimeout(() => {
 }, 1500);
 ```
 
-### throttle
+## throttle
 
 函数节流
 
@@ -64,18 +64,18 @@ function throttle<F extends (...args: any[]) => any>(
 
 **参数**
 
-| 必填 | 参数名 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | func | 要节流的函数 | F | - |
-|  | time | 节流时间，默认为 100ms | number | 100 |
-|  | immediately | 是否立即执行，默认为 true | boolean | true |
+| 必填 | 参数名      | 说明                      | 类型    | 默认值 |
+| :--: | ----------- | ------------------------- | ------- | ------ |
+|  \*  | func        | 要节流的函数              | F       | -      |
+|      | time        | 节流时间，默认为 100ms    | number  | 100    |
+|      | immediately | 是否立即执行，默认为 true | boolean | true   |
 
 **返回值**: `(...args: TArgsType<F>) => void`
 
 **示例**
 
 ```ts
-import { throttle } from '@cmtlyt/base'
+import { throttle } from '@cmtlyt/base';
 // import { throttle } from '@cmtlyt/base/utils/sequential'
 
 const fn = throttle(() => {

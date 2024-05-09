@@ -1,7 +1,7 @@
 import { EventEmitter } from '../eventEmitter';
 import { EMPTY } from '../utils/constant';
 
-export class DefaultStoreController {
+class DefaultStoreController {
   static instance = null;
 
   static getInstance() {

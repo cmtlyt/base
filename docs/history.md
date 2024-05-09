@@ -9,6 +9,18 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.3
+
+新增
+
+- `Logger` 新增 `getInstance` 静态方法
+
+修改
+
+- 部分类型修订
+- 移除多余类型
+- 移除 `createStorePool` 中的 `DefaultStoreController` 导出
+
 ### v0.5.2
 
 新增
@@ -126,13 +138,11 @@ calc2.valueOf(); // 3
 
 - [x] 修复 `clipboard.paste` 返回类型不统一问题
 
-
 ### v0.3.2
 
 修复
 
 - [x] 修复 `getArray` 类型提示中返回类型错误问题
-
 
 ### v0.3.1
 

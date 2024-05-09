@@ -13,6 +13,18 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.3
+
+新增
+
+- `Logger` 新增 `getInstance` 静态方法
+
+修改
+
+- 部分类型修订
+- 移除多余类型
+- 移除 `createStorePool` 中的 `DefaultStoreController` 导出
+
 ### v0.5.2
 
 新增

@@ -1,17 +1,20 @@
 # 字符串相关方法
 
-### getRandomString
+## getRandomString
 
 获取指定长度的随机字符串
 
 **类型声明**
+
 ```ts
 function getRandomString(len?: number): string;
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-|  | len | 字符串长度 | number | 8 |
+**参数**
+
+| 必填 | 参数 | 说明       | 类型   | 默认值 |
+| :--: | ---- | ---------- | ------ | ------ |
+|      | len  | 字符串长度 | number | 8      |
 
 **返回值**: `string`
 
@@ -25,18 +28,21 @@ const str = getRandomString(10);
 console.log(str); // a8sdf9aqw1
 ```
 
-### createLinkByString
+## createLinkByString
 
 将传入的字符串转化为 `blob` 地址
 
 **类型声明**
+
 ```ts
 function createLinkByString(resource: string): string;
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | resource | 资源内容 | string | - |
+**参数**
+
+| 必填 | 参数     | 说明     | 类型   | 默认值 |
+| :--: | -------- | -------- | ------ | ------ |
+|  \*  | resource | 资源内容 | string | -      |
 
 **返回值**: `string`
 
@@ -50,11 +56,12 @@ const blobUrl = createLinkByString('console.log("hello world")');
 console.log(blobUrl); // blob:https://xxxx
 ```
 
-### generateCookieInfo
+## generateCookieInfo
 
 生成 cookie 信息
 
 **类型声明**
+
 ```ts
 interface ICookieOptions {
   duration?: number;
@@ -67,9 +74,11 @@ interface ICookieOptions {
 function generateCookieInfo(options: ICookieOptions): string;
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-|  | options | cookie 配置 | ICookieOptions | \{} |
+**参数**
+
+| 必填 | 参数    | 说明        | 类型           | 默认值 |
+| :--: | ------- | ----------- | -------------- | ------ |
+|      | options | cookie 配置 | ICookieOptions | \{}    |
 
 **返回值**: `string`
 
@@ -89,11 +98,12 @@ const cookieInfo = generateCookieInfo({
 console.log(cookieInfo); // "expires=Fri, 25 Dec 2023 00:00:00 GMT;domain=example.com;max-age=10;path=/"
 ```
 
-### generateClassName
+## generateClassName
 
 生成 className
 
 **类型声明**
+
 ```ts
 function generateClassName(
   ...args: (string | string[] | Record<string, boolean>)[]
@@ -102,9 +112,11 @@ function generateClassName(
 const gc: typeof generateClassName;
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | args | 类名 | string\|string\[]\|Record\<string, boolean> | - |
+**参数**
+
+| 必填 | 参数 | 说明 | 类型                                        | 默认值 |
+| :--: | ---- | ---- | ------------------------------------------- | ------ |
+|  \*  | args | 类名 | string\|string\[]\|Record\<string, boolean> | -      |
 
 **返回值**: `string`
 
@@ -114,7 +126,10 @@ const gc: typeof generateClassName;
 import { generateClassName, gc } from '@cmtlyt/base';
 // import { generateClassName, gc } from '@cmtlyt/base/utils/string'
 
-const className = generateClassName('a', 'b', { c: true }, ['d', { e: false, f: true }]);
+const className = generateClassName('a', 'b', { c: true }, [
+  'd',
+  { e: false, f: true },
+]);
 const className2 = gc('a', 'b', { c: true }, ['d', { e: false, f: true }]);
 console.log('className:', className); // className: "a b c d f"
 console.log('className2:', className2); // className2: "a b c d f"

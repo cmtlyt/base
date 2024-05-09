@@ -19,23 +19,6 @@ interface IStorePoolHandle {
   clearEvents: () => void;
 }
 
-export declare class DefaultStoreController {
-  static getInstance(): DefaultStoreController;
-
-  private itemTotal: number;
-  private pool: any[];
-
-  constructor(initValue?: any);
-
-  private getId: () => number;
-
-  public save: (data: any) => number;
-  public get: (id: number) => any;
-  public delete: (id: number) => void;
-  public clear: () => void;
-  public pop: (id: number) => any;
-}
-
 export declare function createStorePool<T extends IStoreController>(
   controller: T
 ): IStorePoolHandle;

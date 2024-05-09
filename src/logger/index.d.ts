@@ -56,6 +56,10 @@ interface LoggerFuncMaps {
 type ModuleId = unknown;
 
 export declare class Logger {
+  static instance: Logger;
+
+  static getInstance(options?: LoggerOptions): Logger;
+
   constructor(options?: LoggerOptions);
 
   public showMethods: string[];
@@ -63,17 +67,6 @@ export declare class Logger {
   public ignoreMessage: string[] | IgnoreMessageFunc;
   public messageTemplate: string | MessageTemplateFunc;
   public controller: Controller;
-
-  private _removeIgnoreMessage<T>(args: T): T;
-  private _checkOutputConditions(method: string, moduleId: ModuleId): boolean;
-  private _formatOutputMessage(
-    method: string,
-    moduleId: ModuleId,
-    date: Date,
-    args: any[]
-  ): any[];
-  private _output(method: string, moduleId: ModuleId, args: any): void;
-  private _onOutput(logInfo: LogInfo): void;
 
   public log: LoggerFunc;
   public info: LoggerFunc;

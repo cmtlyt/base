@@ -1,6 +1,6 @@
 # 校验相关方法
 
-### isNull
+## isNull
 
 判断是否为 null
 
@@ -12,9 +12,9 @@ function isNull(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -34,7 +34,7 @@ isNull(() => {}); // false
 isNull(Promise.resolve()); // false
 ```
 
-### isNaN
+## isNaN
 
 判断是否为 NaN
 
@@ -46,9 +46,9 @@ function isNaN(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -68,7 +68,7 @@ isNaN(() => {}); // false
 isNaN(Promise.resolve()); // false
 ```
 
-### isNumber
+## isNumber
 
 判断是否为数字
 
@@ -80,9 +80,9 @@ function isNumber(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -102,7 +102,7 @@ isNumber(() => {}); // false
 isNumber(Promise.resolve()); // false
 ```
 
-### isPromise
+## isPromise
 
 判断是否为 Promise
 
@@ -114,9 +114,9 @@ function isPromise(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -134,10 +134,10 @@ isPromise([]); // false
 isPromise({}); // false
 isPromise(() => {}); // false
 isPromise(NaN); // false
-isPromise({ then() { } }) // true
+isPromise({ then() {} }); // true
 ```
 
-### getType
+## getType
 
 获取值类型
 
@@ -149,9 +149,9 @@ function getType(value: any): string;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `string`
 
@@ -169,10 +169,10 @@ getType([]); // 'array'
 getType({}); // 'object'
 getType(() => {}); // 'function'
 getType(Promise.resolve()); // 'promise'
-getType({ then() { } }) // 'object'
+getType({ then() {} }); // 'object'
 ```
 
-### isEmpty
+## isEmpty
 
 判断是否为空
 
@@ -184,9 +184,9 @@ function isEmpty(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -204,12 +204,12 @@ isEmpty([]); // true
 isEmpty({}); // true
 isEmpty(() => {}); // false
 isEmpty(Promise.resolve()); // false
-isEmpty({ then() { } }) // false
-isEmpty(new Set()) // true
-isEmpty(new Set([1])) // false
+isEmpty({ then() {} }); // false
+isEmpty(new Set()); // true
+isEmpty(new Set([1])); // false
 ```
 
-### isFile
+## isFile
 
 判断是否为文件
 
@@ -221,9 +221,9 @@ function isFile(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -237,7 +237,7 @@ isFile(new File([], 'test.txt')); // true
 isFile(new Blob([], { type: 'text/plain' })); // false
 ```
 
-### isBlob
+## isBlob
 
 判断是否为 Blob
 
@@ -249,9 +249,9 @@ function isBlob(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -265,7 +265,7 @@ isBlob(new File([], 'test.txt')); // false
 isBlob(new Blob([], { type: 'text/plain' })); // true
 ```
 
-### isHttpUrlString
+## isHttpUrlString
 
 判断是否为 http 链接字符串
 
@@ -277,9 +277,9 @@ function isHttpUrlString(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -299,7 +299,7 @@ isHttpUrlString('tel://cmtlyt.com'); // false
 isHttpUrlString('data://cmtlyt.com'); // false
 ```
 
-### isBlobUrlString
+## isBlobUrlString
 
 判断是否为 blob 链接字符串
 
@@ -311,9 +311,9 @@ function isBlobUrlString(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
@@ -333,7 +333,7 @@ isBlobUrlString('tel://cmtlyt.com'); // false
 isBlobUrlString('data://cmtlyt.com'); // false
 ```
 
-### isDataUrlString
+## isDataUrlString
 
 判断是否为 data 链接字符串
 
@@ -345,13 +345,14 @@ function isDataUrlString(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
 **示例**
+
 ```ts
 import { isDataUrlString } from '@cmtlyt/base';
 // import { isDataUrlString } from '@cmtlyt/base/utils/verify';
@@ -359,7 +360,7 @@ import { isDataUrlString } from '@cmtlyt/base';
 isDataUrlString('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'); // true
 ```
 
-### isUrl
+## isUrl
 
 判断是否为 url
 
@@ -371,13 +372,14 @@ function isUrl(value: any): boolean;
 
 **参数**
 
-| 必填 | 参数名 | 类型 | 描述 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | value | any | 待判断的值 | - |
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
 
 **返回值**: `boolean`
 
 **示例**
+
 ```ts
 import { isUrl } from '@cmtlyt/base';
 // import { isUrl } from '@cmtlyt/base/utils/verify';

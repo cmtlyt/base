@@ -1,6 +1,6 @@
 # 数组相关方法
 
-### getArray
+## getArray
 
 参数归一化为数组
 
@@ -10,9 +10,11 @@
 function getArray<T>(value: T): T extends any[] ? T : T[];
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-|  | value | 数组 | any |  |
+**参数**
+
+| 必填 | 参数  | 说明 | 类型 | 默认值 |
+| :--: | ----- | ---- | ---- | ------ |
+|      | value | 数组 | any  |        |
 
 **返回值**: `array`
 
@@ -29,23 +31,22 @@ console.log(getArray()); // []
 console.log(getArray({ a: 1 })); // [{ a: 1 }]
 ```
 
-### getArraySlice
+## getArraySlice
 
 获取数组切片
 
 **类型声明**
 
 ```ts
-function getArraySlice<T extends any[]>(
-  array: T,
-  size: number
-): T[];
+function getArraySlice<T extends any[]>(array: T, size: number): T[];
 ```
 
-| 必填 | 参数 | 说明 | 类型 | 默认值 |
-| :-: | --- | --- | --- | --- |
-| * | array | 数组 | any[] |  |
-|  | size | 切片大小 | number |  |
+**参数**
+
+| 必填 | 参数  | 说明     | 类型   | 默认值 |
+| :--: | ----- | -------- | ------ | ------ |
+|  \*  | array | 数组     | any[]  |        |
+|      | size  | 切片大小 | number |        |
 
 **返回值**: `array`
 

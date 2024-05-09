@@ -10,15 +10,8 @@ type TCallback = (event: CustomEvent) => void;
 export declare class EventEmitter {
   static getDetaultEmitter: () => EventEmitter;
 
-  private eventMap: Record<string, TCallback[]>;
-
   constructor();
 
-  private _run(
-    eventName: string,
-    callback: TCallback,
-    event: CustomEvent
-  ): void;
   public on(eventName: string, callback: TCallback): EventEmitter;
   public off(eventName: string, callback: TCallback): EventEmitter;
   public emit(eventName: string, data: any): EventEmitter;

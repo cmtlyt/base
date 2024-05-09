@@ -1,1 +1,12 @@
-["index", "logger", "createWorkerFunc"]
+[
+  "index",
+  "calculator",
+  "clipboard",
+  "cookie",
+  "createPool",
+  "createStorePool",
+  "createUploader",
+  "createWorkerFunc",
+  "eventEmitter",
+  "logger"
+]
