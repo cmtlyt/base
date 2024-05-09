@@ -2,9 +2,9 @@
 
 /*! react/jsx-runtime */
 
-/*! react/jsx-runtime */
-
 /*! core-js/modules/es.array.includes.js */
+
+/*! react/jsx-runtime */
 
 /*! rspress/runtime */
 

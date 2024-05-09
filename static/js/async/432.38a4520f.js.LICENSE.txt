@@ -1,8 +1,8 @@
 /*! react/jsx-runtime */
 
-/*! core-js/modules/es.array.includes.js */
-
 /*! rspress/runtime */
+
+/*! core-js/modules/es.array.includes.js */
 
 /*! react/jsx-runtime */
 

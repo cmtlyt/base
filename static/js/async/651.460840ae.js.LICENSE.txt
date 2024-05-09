@@ -1,14 +1,14 @@
 /*! react/jsx-runtime */
 
+/*! react */
+
 /*! react/jsx-runtime */
 
 /*! core-js/modules/es.array.includes.js */
 
-/*! react */
+/*! rspress/runtime */
 
 /*! @mdx-js/react */
-
-/*! rspress/runtime */
 
 /*! ./ReadingTime.less */
 
