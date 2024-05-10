@@ -7,6 +7,7 @@ import { getType, isBlob, isFile, isUrl } from '../utils/verify';
  * @typedef {{
  *  url: string;
  *  maxConcurrent?: number;
+ *  concurrentNode?: 'chunk'|'file';
  *  chunkSize?: number;
  *  dataType?: 'FormData';
  *  dataKey?: string;
@@ -53,6 +54,12 @@ import { getType, isBlob, isFile, isUrl } from '../utils/verify';
  *  clearOn: () => void;
  *  onOnce: (callback: Function) => void;
  * }} UploaderWorkerController
+ * @typedef {{
+ *  taskInfo:{ data: UploadFinishInfo; }[],
+ *  taskStatus:'success'|'error'
+ *  errorChunks: number[]
+ *  customOption:any
+ * }} UploadResult
  */
 
 // 允许的上传请求体格式
@@ -63,6 +70,9 @@ const ALLOWED_RESPONSE_TYPES = ['json', 'string'];
 
 // 允许的请求方式
 const ALLOWED_REQUEST_METHODS = ['POST', 'PUT'];
+
+// 允许的并发节点
+const ALLOWED_CONCURRENT_NODES = ['chunk', 'file'];
 
 /**
  * @param {string} key
@@ -98,6 +108,7 @@ function normalizeOptions(options) {
   const {
     url,
     maxConcurrent = 3,
+    concurrentNode = 'chunk',
     chunkSize = 1024 * 1024,
     dataType = 'FormData',
     dataKey = 'file',
@@ -110,6 +121,13 @@ function normalizeOptions(options) {
   const normalizedOptions = {
     url,
     maxConcurrent: cast('maxConcurrent', 'number', maxConcurrent, 3),
+    concurrentNode: cast(
+      'concurrentNode',
+      'string',
+      concurrentNode,
+      'chunk',
+      ALLOWED_CONCURRENT_NODES
+    ),
     chunkSize: cast('chunkSize', 'number', chunkSize, 1024 * 512),
     dataType: cast(
       'dataType',
@@ -338,6 +356,7 @@ class UploadController {
   constructor(options) {
     this._serverPath = options.url;
     this._maxConcurrent = options.maxConcurrent;
+    this._concurrentNode = options.concurrentNode;
     this._chunkSize = options.chunkSize;
     this._dataType = options.dataType;
     this._dataKey = options.dataKey;
@@ -367,10 +386,25 @@ class UploadController {
     progressCallback(progressInfo);
   }
   /**
-   * @param {(data: {
-   *  taskInfo:{ data: UploadFinishInfo; }[],
-   *  customOption:any
-   * })=>void} resolve
+   * @param {{ data: UploadFinishInfo; }[]} finishInfo
+   */
+  _getTaskStatus(finishInfo) {
+    if (finishInfo.some((item) => item.data.errorChunks.length)) {
+      return 'error';
+    }
+    return 'success';
+  }
+  /**
+   * @param {{ data: UploadFinishInfo; }[]} finishInfo
+   * @returns {number[]}
+   */
+  _getErrorChunks(finishInfo) {
+    return finishInfo.reduce((pre, cur) => {
+      return pre.concat(cur.data.errorChunks);
+    }, []);
+  }
+  /**
+   * @param {(data: UploadResult)=>void} resolve
    * @param {{id:string,workerTotal:number,customOption:any}} uploadInfo
    * @param {UploadFinishInfo} res
    */
@@ -378,8 +412,13 @@ class UploadController {
     const { id, workerTotal } = uploadInfo;
     const finishInfo = this._finishInfoMap[id];
     finishInfo.push({ data: res });
-    if (finishInfo.length === workerTotal) {
-      resolve({ taskInfo: finishInfo, customOption: uploadInfo.customOption });
+    if (finishInfo.length >= workerTotal) {
+      resolve({
+        taskInfo: finishInfo,
+        taskStatus: this._getTaskStatus(finishInfo),
+        errorChunks: this._getErrorChunks(finishInfo),
+        customOption: uploadInfo.customOption,
+      });
       delete this._finishInfoMap[id];
       // 如果没有
       if (!Object.keys(this._finishInfoMap)) {
@@ -420,10 +459,75 @@ class UploadController {
       .then(this._workerResolve.bind(this, resolve, uploadInfo), reject)
       .finally(() => {
         worker.remove(onMessage);
-        this._runTask();
+        this._runTaskPreHandle();
       });
   }
-  async _runTask() {
+  /**
+   * @param {{
+   *  retryChunksMap: number[]
+   *  taskChunkSize: number
+   *  chunkTotal: number
+   *  runWorkerBaseData: any
+   * }} options
+   * @returns {Promise<void>}
+   */
+  async _concurrentRunTask({
+    runWorkerBaseData,
+    retryChunksMap,
+    taskChunkSize,
+    chunkTotal,
+  }) {
+    if (retryChunksMap.length) {
+      for (const idx in retryChunksMap) {
+        const poolItem = await this._uploadWorkerPool.get();
+        this._runWorker({
+          chunkIdxs: retryChunksMap[idx],
+          start: 0,
+          end: 0,
+          worker: poolItem.data,
+          ...runWorkerBaseData,
+        });
+      }
+      return;
+    }
+
+    if (this._concurrentNode === 'chunk') {
+      for (let idx = 0; idx < this._maxConcurrent; ++idx) {
+        const poolItem = await this._uploadWorkerPool.get();
+        const start = idx * taskChunkSize;
+        const end = Math.min(chunkTotal, start + taskChunkSize);
+        this._runWorker({
+          start,
+          end,
+          worker: poolItem.data,
+          ...runWorkerBaseData,
+        });
+      }
+      return;
+    }
+
+    if (this._concurrentNode === 'file') {
+      runWorkerBaseData.workerTotal = 1;
+      const poolItem = await this._uploadWorkerPool.get();
+      this._runWorker({
+        start: 0,
+        end: chunkTotal,
+        worker: poolItem.data,
+        ...runWorkerBaseData,
+      });
+    }
+  }
+  /**
+   * @param {number[][]} retryChunksMap
+   * @returns {number}
+   */
+  _getUploadNeedWorkerTotal(retryChunksMap) {
+    if (retryChunksMap.length) return retryChunksMap.length;
+    if (this._concurrentNode === 'chunk') return this._maxConcurrent;
+    if (this._concurrentNode === 'file') return 1;
+    return 0;
+  }
+  async _runTaskPreHandle() {
     if (this._status === UPLOAD_CONTROLLER_STATUS.closed) return;
     if (this._uploadQueue.length === 0) return;
     if (this._uploadWorkerPool.usableCount === 0) return;
@@ -448,7 +552,7 @@ class UploadController {
 
     const uploadInfo = {
       id: getRandomString(32),
-      workerTotal: retryChunksMap.length || this._maxConcurrent,
+      workerTotal: this._getUploadNeedWorkerTotal(retryChunksMap),
       customOption,
     };
 
@@ -462,31 +566,12 @@ class UploadController {
       reject,
     };
 
-    if (retryChunksMap.length) {
-      for (const idx in retryChunksMap) {
-        const poolItem = await this._uploadWorkerPool.get();
-        this._runWorker({
-          chunkIdxs: retryChunksMap[idx],
-          start: 0,
-          end: 0,
-          worker: poolItem.data,
-          ...runWorkerBaseData,
-        });
-      }
-      return;
-    }
-
-    for (let idx = 0; idx < this._maxConcurrent; ++idx) {
-      const poolItem = await this._uploadWorkerPool.get();
-      const start = idx * taskChunkSize;
-      const end = Math.min(chunkTotal, start + taskChunkSize);
-      this._runWorker({
-        start,
-        end,
-        worker: poolItem.data,
-        ...runWorkerBaseData,
-      });
-    }
+    this._concurrentRunTask({
+      runWorkerBaseData,
+      retryChunksMap,
+      taskChunkSize,
+      chunkTotal,
+    });
   }
   /**
    *
@@ -511,7 +596,7 @@ class UploadController {
         reject,
         customOption,
       });
-      this._runTask();
+      this._runTaskPreHandle();
     });
   }
   /**

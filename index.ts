@@ -46,65 +46,54 @@
 
 // console.log(a, b, arr[0], arr[1]);
 
-// import {
-//   createUploader,
-//   createLinkByString,
-//   createWorkerFunc,
-//   getRandomString,
-// } from './src';
+import {
+  createUploader,
+  createLinkByString,
+  createWorkerFunc,
+  getRandomString,
+} from './src';
 
-// // const { run } = createWorkerFunc(
-// //   (a, p: number, ...c: string[]) => {
-// //     console.log(a, p, c);
-// //   },
-// //   [],
-// //   {
-// //     needPost: true,
-// //   }
-// // );
-
-// // run(1);
-
-// const uploader = createUploader({
-//   url: 'http://localhost:3000/upload',
-//   chunkSize: 3,
-//   maxConcurrent: 2,
-//   retryCount: 0,
-//   async bodyHandler({ chunk, chunkIdx, customOption }) {
-//     console.log(chunkIdx, chunk, await chunk.text(), customOption);
-//     return {
-//       randomId: Math.random().toString(36).slice(2),
-//     };
+// const { run } = createWorkerFunc(
+//   (a, p: number, ...c: string[]) => {
+//     console.log(a, p, c);
 //   },
-// });
+//   [],
+//   {
+//     needPost: true,
+//   }
+// );
 
-// uploader
-//   .upload(createLinkByString(`测试测试测试`), {
-//     onProgress: (e) => {},
-//     customOption: {
-//       randomId: getRandomString(),
-//     },
-//   })
-//   .then((res) => {
-//     console.log(1, res);
-//   })
-//   .catch((res) => {
-//     console.log(res);
-//   });
+// run(1);
 
-// uploader
-//   .upload(createLinkByString(`测试测试测试`), {
-//     onProgress: (e) => {},
-//     customOption: {
-//       randomId: getRandomString(),
-//     },
-//   })
-//   .then((res) => {
-//     console.log(2, res);
-//   })
-//   .catch((res) => {
-//     console.log(res);
-//   });
+const uploader = createUploader({
+  url: 'http://localhost:3000/upload',
+  chunkSize: 3,
+  maxConcurrent: 2,
+  concurrentNode: 'file',
+  retryCount: 2,
+  async bodyHandler({ chunk, chunkIdx, customOption }) {
+    console.log(chunkIdx, chunk, await chunk.text(), customOption);
+    return {
+      randomId: Math.random().toString(36).slice(2),
+    };
+  },
+});
+
+for (let i = 0; i < 4; ++i) {
+  uploader
+    .upload(createLinkByString(`测试测试测试`), {
+      onProgress: (e) => {},
+      customOption: {
+        randomId: getRandomString(),
+      },
+    })
+    .then((res) => {
+      console.log(res.customOption.randomId, res);
+    })
+    .catch((res) => {
+      console.log(res);
+    });
+}
 
 // let key: any = {};
 // const map = new WeakMap();

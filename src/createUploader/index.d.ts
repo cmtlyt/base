@@ -1,6 +1,7 @@
 interface IUploadControllerOptions {
   url: string;
   maxConcurrent?: number;
+  concurrentNode?: 'chunk' | 'file';
   chunkSize?: number;
   dataType?: 'FormData';
   dataKey?: string;
@@ -27,6 +28,8 @@ interface IUploadFinishInfo {
 
 interface IUploadResult {
   taskInfo: IUploadFinishInfo;
+  taskStatus: 'success' | 'error';
+  errorChunks: number[];
   customOption: any;
 }
 

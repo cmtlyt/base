@@ -6,18 +6,19 @@
 
 ### 参数
 
-| 必填 | 参数名        | 说明         | 类型                   | 默认值       |
-| :--: | ------------- | ------------ | ---------------------- | ------------ |
-|  \*  | url           | 上传地址     | string                 |              |
-|      | maxConcurrent | 最大并发数   | number                 | 3            |
-|      | chunkSize     | 分片大小     | number                 | 1024 \* 1024 |
-|      | dataType      | 数据类型     | 'FormData'             | 'FormData'   |
-|      | dataKey       | 数据 key     | string                 | 'file'       |
-|      | responseType  | 响应类型     | 'json'                 | 'json'       |
-|      | retryCount    | 重试次数     | number                 | 3            |
-|      | requestMethod | 请求方法     | 'POST'                 | 'POST'       |
-|      | headers       | 请求头       | Record<string, string> | {}           |
-|      | bodyHandler   | 自定义请求体 | TBodyHanderFunc        | -            |
+| 必填 | 参数名         | 说明         | 类型                   | 默认值       |
+| :--: | -------------- | ------------ | ---------------------- | ------------ |
+|  \*  | url            | 上传地址     | string                 |              |
+|      | maxConcurrent  | 最大并发数   | number                 | 3            |
+|      | concurrentNode | 并发节点类型 | 'file'\|'chunk'        | 'chunk'      |
+|      | chunkSize      | 分片大小     | number                 | 1024 \* 1024 |
+|      | dataType       | 数据类型     | 'FormData'             | 'FormData'   |
+|      | dataKey        | 数据 key     | string                 | 'file'       |
+|      | responseType   | 响应类型     | 'json'                 | 'json'       |
+|      | retryCount     | 重试次数     | number                 | 3            |
+|      | requestMethod  | 请求方法     | 'POST'                 | 'POST'       |
+|      | headers        | 请求头       | Record<string, string> | {}           |
+|      | bodyHandler    | 自定义请求体 | TBodyHanderFunc        | -            |
 
 :::details 类型补充
 

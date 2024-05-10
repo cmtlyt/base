@@ -13,6 +13,12 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.4
+
+新增
+
+- `createUploader` 新增 `concurrentNode` 配置, 用于配制并发上传的节点
+
 ### v0.5.3
 
 新增
