@@ -1,12 +1,12 @@
-/*! ./lib/util/merge */
+/*! @theme-assets/arrow-right */
+
+/*! body-scroll-lock */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/verify.md */
 
 /*! refractor/lang/css.js */
 
 /*! @babel/runtime/helpers/objectWithoutProperties */
-
-/*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/clipboard.md */
 
@@ -32,35 +32,25 @@
 
 /*! ./util/create */
 
-/*! @theme-assets/menu */
+/*! react/jsx-runtime */
 
-/*! @rspress/runtime */
+/*! react */
 
-/*! @theme-assets/jump */
-
-/*! @rspress/shared */
+/*! html-tags */
 
 /*! ./types */
 
-/*! lodash-es */
-
 /*! react-fast-compare */
 
-/*! @theme-assets/down */
-
-/*! @theme-assets/file */
-
-/*! virtual-prism-languages */
+/*! react/jsx-runtime */
 
 /*! hastscript */
 
-/*! react/jsx-runtime */
+/*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createPool.md */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/reflect.md */
-
-/*! react */
 
 /*! is-decimal */
 
@@ -68,19 +58,11 @@
 
 /*! /Users/cmtlyt/code/package/base/docs/playground/index.jsx */
 
-/*! @theme-assets/translator */
-
-/*! @theme-assets/empty */
-
-/*! react/jsx-runtime */
-
-/*! react */
-
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/date.md */
 
 /*! virtual-routes */
 
-/*! virtual-search-index-hash */
+/*! @mdx-js/react */
 
 /*! core-js/modules/web.url-search-params.has.js */
 
@@ -96,21 +78,13 @@
 
 /*! ./lib/html */
 
-/*! lodash-es */
-
 /*! @rspress/shared */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/cache.md */
 
-/*! nprogress/nprogress.css */
-
-/*! react/jsx-runtime */
-
 /*! react */
 
 /*! ./html-tags.json */
-
-/*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/sequential.md */
 
@@ -122,23 +96,17 @@
 
 /*! refractor/lang/diff.js */
 
-/*! @theme-assets/arrow-down */
+/*! react-helmet-async */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/fp.md */
 
 /*! refractor/lang/bash.js */
 
-/*! react/jsx-runtime */
+/*! @theme-assets/wrapped */
 
 /*! react */
-
-/*! @rspress/runtime */
-
-/*! react/jsx-runtime */
 
 /*! ./util/create */
-
-/*! react */
 
 /*! /Users/cmtlyt/code/package/base/node_modules/.pnpm/@rspress+plugin-medium-zoom@1.19.1_@rspress+runtime@1.19.1/node_modules/@rspress/plugin-medium-zoom/src/components/MediumZoom.tsx */
 
@@ -149,8 +117,6 @@
 /*! @rspress/runtime */
 
 /*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */
-
-/*! @theme-assets/gitlab */
 
 /*! @rspress/runtime */
 
@@ -168,33 +134,47 @@
 
 /*! react */
 
-/*! @rspress/runtime */
+/*! @theme-assets/wrap */
 
-/*! @theme-assets/moon */
+/*! react/jsx-runtime */
+
+/*! react */
+
+/*! virtual-search-hooks */
+
+/*! react-transition-group */
 
 /*! ./normalize */
 
 /*! @babel/runtime/helpers/extends */
 
-/*! @theme-assets/arrow-right */
-
 /*! react */
-
-/*! body-scroll-lock */
 
 /*! medium-zoom */
 
+/*! @theme */
+
 /*! ./checkForListedLanguage */
+
+/*! htmr */
+
+/*! ./bundle */
 
 /*! ./factory */
 
+/*! react/jsx-runtime */
+
 /*! react-syntax-highlighter/dist/esm/languages/prism/tsx */
+
+/*! react */
 
 /*! character-reference-invalid */
 
 /*! oh-my-live2d */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/logger.md */
+
+/*! @theme-assets/success */
 
 /*! ./schema */
 
@@ -208,23 +188,29 @@
 
 /*! react */
 
+/*! react/jsx-runtime */
+
+/*! @theme-assets/github */
+
 /*! react-syntax-highlighter/dist/esm/languages/prism/bash */
 
 /*! prismjs/components/prism-core */
 
-/*! html-tags */
+/*! react */
+
+/*! @theme-assets/small-menu */
 
 /*! react-helmet-async */
 
 /*! react */
 
+/*! react */
+
 /*! react/jsx-runtime */
 
-/*! react */
-
-/*! react */
-
 /*! ./create-element */
+
+/*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/string.md */
 
@@ -232,7 +218,13 @@
 
 /*! @rspress/runtime */
 
+/*! @theme-assets/copy */
+
+/*! react/jsx-runtime */
+
 /*! /Users/cmtlyt/code/package/base/docs/guides/index.md */
+
+/*! react */
 
 /*! react/jsx-runtime */
 
@@ -244,7 +236,13 @@
 
 /*! character-entities-legacy */
 
-/*! @mdx-js/react */
+/*! react/jsx-runtime */
+
+/*! react */
+
+/*! nprogress */
+
+/*! @theme-assets/header */
 
 /*! parse-entities */
 
@@ -256,6 +254,10 @@
 
 /*! ./MediumZoom.css */
 
+/*! @theme-assets/search */
+
+/*! virtual-routes */
+
 /*! virtual-global-styles */
 
 /*! @babel/runtime/helpers/toConsumableArray */
@@ -264,13 +266,27 @@
 
 /*! react-lazy-with-preload */
 
-/*! react-helmet-async */
+/*! react */
+
+/*! @rspress/runtime */
+
+/*! react/jsx-runtime */
+
+/*! react/jsx-runtime */
+
+/*! react */
+
+/*! react */
+
+/*! react/jsx-runtime */
 
 /*! property-information/normalize */
 
 /*! ./TransitionGroupContext */
 
 /*! refractor/lang/tsx.js */
+
+/*! react */
 
 /*! core-js/modules/esnext.iterator.map.js */
 
@@ -284,9 +300,11 @@
 
 /*! @theme */
 
-/*! @theme-assets/wrapped */
-
 /*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */
+
+/*! virtual-site-data */
+
+/*! lodash-es */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createStorePool.md */
 
@@ -296,9 +314,11 @@
 
 /*! /Users/cmtlyt/code/package/base/node_modules/.pnpm/@rspress+plugin-playground@1.19.1_@rspress+core@1.19.1_@swc+helpers@0.5.3_webpack@5.91.0_webp_3fffe3k5mdks4wztkg4l2zqomq/node_modules/@rspress/plugin-playground/static/global-styles/web.css */
 
-/*! ./decode-entity */
+/*! @theme-assets/loading */
 
-/*! @theme-assets/wrap */
+/*! ./bundle.css */
+
+/*! ./decode-entity */
 
 /*! react/jsx-runtime */
 
@@ -308,15 +328,11 @@
 
 /*! react */
 
-/*! virtual-search-hooks */
-
 /*! ./util/types */
 
 /*! virtual-site-data */
 
 /*! ./util/create */
-
-/*! react-transition-group */
 
 /*! ./lib/ReactPropTypesSecret */
 
@@ -326,13 +342,7 @@
 
 /*! refractor/lang/markdown.js */
 
-/*! @theme */
-
 /*! property-information/find */
-
-/*! htmr */
-
-/*! ./bundle */
 
 /*! is-alphanumerical */
 
@@ -340,37 +350,47 @@
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/logger.md */
 
+/*! lodash-es */
+
 /*! @rspress/runtime */
 
-/*! react/jsx-runtime */
+/*! @theme-assets/close */
 
 /*! refractor/lang/xml-doc.js */
-
-/*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/cookie.md */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/string.md */
 
-/*! @theme-assets/success */
-
 /*! core-js/modules/web.url-search-params.delete.js */
-
-/*! react/jsx-runtime */
 
 /*! refractor/lang/javascript.js */
 
-/*! react */
+/*! flexsearch */
+
+/*! Bundled license information:
+
+lodash-es/lodash.js:
+  (**
+   * @license
+   * Lodash (Custom Build) <https://lodash.com/>
+   * Build: `lodash modularize exports="es" -o ./`
+   * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+   * Released under MIT license <https://lodash.com/license>
+   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+   * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+   *)
+*/
 
 /*! react/jsx-runtime */
 
 /*! ./highlight */
 
-/*! @theme-assets/github */
+/*! react */
 
 /*! ./schema */
 
-/*! react */
+/*! @rspress/runtime */
 
 /*! ./util/create */
 
@@ -378,9 +398,17 @@
 
 /*! property-information/html */
 
-/*! @theme-assets/small-menu */
+/*! react/jsx-runtime */
+
+/*! react/jsx-runtime */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createWorkerFunc.md */
+
+/*! @rspress/runtime */
+
+/*! react */
+
+/*! react */
 
 /*! virtual-site-data */
 
@@ -388,29 +416,21 @@
 
 /*! refractor/core */
 
-/*! react/jsx-runtime */
-
 /*! react-router-dom */
-
-/*! react */
 
 /*! refractor/lang/scss.js */
 
-/*! @theme-assets/copy */
-
-/*! react/jsx-runtime */
-
 /*! refractor/lang/json.js */
+
+/*! react-dom */
 
 /*! @babel/runtime/helpers/esm/inheritsLoose */
 
-/*! react */
-
 /*! space-separated-tokens */
 
-/*! /Users/cmtlyt/code/package/base/docs/guides/utils/reflect.md */
-
 /*! react/jsx-runtime */
+
+/*! /Users/cmtlyt/code/package/base/docs/guides/utils/reflect.md */
 
 /*! react */
 
@@ -418,13 +438,11 @@
 
 /*! refractor/lang/yaml.js */
 
-/*! nprogress */
+/*! @theme-assets/sun */
 
 /*! /Users/cmtlyt/code/package/base/docs/index.md */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createWorkerFunc.md */
-
-/*! @theme-assets/header */
 
 /*! virtual-routes */
 
@@ -445,39 +463,33 @@
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/eventEmitter.md */
 
-/*! @theme-assets/search */
-
 /*! @rspress/runtime */
 
-/*! virtual-routes */
+/*! react/jsx-runtime */
 
 /*! ./util/create */
 
+/*! @theme-assets/title */
+
 /*! core-js/modules/esnext.iterator.constructor.js */
+
+/*! react */
 
 /*! ./lang/javascript */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/cookie.md */
 
-/*! react */
+/*! copy-to-clipboard */
 
-/*! react/jsx-runtime */
+/*! react-syntax-highlighter */
 
-/*! @rspress/runtime */
-
-/*! react/jsx-runtime */
-
-/*! react */
+/*! is-html */
 
 /*! @theme */
-
-/*! react */
 
 /*! ./lib/xml */
 
 /*! react-syntax-highlighter/dist/esm/languages/prism/less */
-
-/*! react/jsx-runtime */
 
 /*! react-syntax-highlighter/dist/esm/languages/prism/markdown */
 
@@ -485,9 +497,9 @@
 
 /*! @babel/runtime/helpers/defineProperty */
 
-/*! react */
-
 /*! is-alphabetical */
+
+/*! react */
 
 /*! ./utils/reflow */
 
@@ -497,19 +509,27 @@
 
 /*! react-dom */
 
-/*! virtual-site-data */
-
 /*! ./lib/aria */
 
-/*! lodash-es */
+/*! @theme-assets/menu */
+
+/*! @rspress/runtime */
+
+/*! @theme-assets/jump */
+
+/*! @rspress/shared */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/index.md */
 
 /*! react-syntax-highlighter/dist/esm/languages/prism/scss */
 
-/*! @theme-assets/loading */
+/*! lodash-es */
 
-/*! ./bundle.css */
+/*! @theme-assets/down */
+
+/*! @theme-assets/file */
+
+/*! virtual-prism-languages */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/index.md */
 
@@ -519,7 +539,17 @@
 
 /*! react */
 
+/*! @theme-assets/translator */
+
+/*! @theme-assets/empty */
+
+/*! react/jsx-runtime */
+
 /*! ./utils/reflow */
+
+/*! react */
+
+/*! virtual-search-index-hash */
 
 /*! ./hooks */
 
@@ -532,10 +562,6 @@
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createStorePool.md */
 
 /*! react */
-
-/*! lodash-es */
-
-/*! @theme-assets/close */
 
 /*! /Users/cmtlyt/code/package/base/node_modules/.pnpm/@rspress+plugin-container-syntax@1.19.1/node_modules/@rspress/plugin-container-syntax/container.css */
 
@@ -551,53 +577,31 @@
 
 /*! core-js/modules/esnext.async-iterator.map.js */
 
+/*! lodash-es */
+
 /*! core-js/modules/esnext.async-iterator.find.js */
 
 /*! /Users/cmtlyt/code/package/base/node_modules/.pnpm/rspress-plugin-live2d@0.3.0_rspress@1.19.1_@swc+helpers@0.5.3_webpack@5.91.0_webpack-cli@5.1.4__/node_modules/rspress-plugin-live2d/components/Live2DWidget.tsx */
+
+/*! nprogress/nprogress.css */
 
 /*! ./config */
 
 /*! ./lib/util/defined-info */
 
-/*! flexsearch */
-
-/*! Bundled license information:
-
-lodash-es/lodash.js:
-  (**
-   * @license
-   * Lodash (Custom Build) <https://lodash.com/>
-   * Build: `lodash modularize exports="es" -o ./`
-   * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
-   * Released under MIT license <https://lodash.com/license>
-   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-   * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-   *)
-*/
-
 /*! react/jsx-runtime */
 
 /*! react/jsx-runtime */
 
 /*! react */
-
-/*! @rspress/runtime */
 
 /*! prop-types */
 
-/*! react/jsx-runtime */
-
-/*! react/jsx-runtime */
-
 /*! @rspress/runtime */
-
-/*! react */
-
-/*! @rspress/runtime */
-
-/*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createUploader.md */
+
+/*! @theme-assets/arrow-down */
 
 /*! @babel/runtime/helpers/esm/inheritsLoose */
 
@@ -605,25 +609,27 @@ lodash-es/lodash.js:
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/date.md */
 
-/*! react-dom */
-
-/*! react/jsx-runtime */
-
-/*! react */
-
 /*! react */
 
 /*! invariant */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/createUploader.md */
 
+/*! react/jsx-runtime */
+
+/*! @rspress/runtime */
+
+/*! react/jsx-runtime */
+
 /*! ./util/types */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/basic/clipboard.md */
 
-/*! @theme-assets/sun */
+/*! react */
 
 /*! ./defined-info */
+
+/*! @theme-assets/gitlab */
 
 /*! ../../normalize */
 
@@ -637,25 +643,17 @@ lodash-es/lodash.js:
 
 /*! react-syntax-highlighter/dist/esm/languages/prism/xml-doc */
 
-/*! react/jsx-runtime */
-
-/*! @theme-assets/title */
-
-/*! react */
-
-/*! copy-to-clipboard */
+/*! @rspress/runtime */
 
 /*! core-js/modules/web.url-search-params.size.js */
 
-/*! react-syntax-highlighter */
+/*! @theme-assets/moon */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/index.md */
 
 /*! is-decimal */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/constant.md */
-
-/*! is-html */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/utils/constant.md */
 
@@ -664,3 +662,5 @@ lodash-es/lodash.js:
 /*! react */
 
 /*! /Users/cmtlyt/code/package/base/docs/guides/index.md */
+
+/*! ./lib/util/merge */
