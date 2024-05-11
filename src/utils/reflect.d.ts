@@ -50,3 +50,5 @@ export function set<T extends object>(
 ): boolean;
 
 export function setPrototypeOf<T>(target: T, proto: any): boolean;
+
+export function getCallStack(): { func: string; file: string }[];

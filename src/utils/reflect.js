@@ -230,3 +230,27 @@ export const setPrototypeOf = cacheByReturn(() => {
     return true;
   };
 });
+
+const stackReg = /(?!\n).*?at(.*?)(\((.*?)\))?(?=\n)/g;
+
+export function getCallStack() {
+  const err = new Error();
+  const stackStr = err.stack + '\n';
+  const stack = [];
+
+  let match;
+  while ((match = stackReg.exec(stackStr)) !== null) {
+    let [, func, , fileLine] = match;
+    if (!fileLine) {
+      fileLine = func;
+      func = '';
+    }
+    func = func.trim();
+    fileLine = fileLine.trim();
+    stack.push({ func, fileLine });
+  }
+  const ignoreIndex = stack.findIndex(
+    (item) => item.func === getCallStack.name
+  );
+  return stack.slice(ignoreIndex + 1);
+}
