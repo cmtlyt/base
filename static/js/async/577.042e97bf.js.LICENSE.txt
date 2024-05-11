@@ -1,0 +1,117 @@
+/*! prop-types */
+
+/*! ../useMount/index.js */
+
+/*! ./MonacoContainer.js */
+
+/*! ../validators/index.js */
+
+/*! ../utils/curry.js */
+
+/*! react */
+
+/*! ./Editor/index.js */
+
+/*! core-js/modules/es.array.push.js */
+
+/*! ../hooks/usePrevious/index.js */
+
+/*! react */
+
+/*! react */
+
+/*! ../utils/compose.js */
+
+/*! core-js/modules/es.error.cause.js */
+
+/*! react */
+
+/*! prop-types */
+
+/*! react */
+
+/*! ./styles.js */
+
+/*! @monaco-editor/loader */
+
+/*! ../MonacoContainer/index.js */
+
+/*! @monaco-editor/react */
+
+/*! prop-types */
+
+/*! react */
+
+/*! ../hooks/useUpdate/index.js */
+
+/*! react */
+
+/*! ../utils/isObject.js */
+
+/*! ./hooks/useMonaco/index.js */
+
+/*! core-js/modules/esnext.iterator.map.js */
+
+/*! react */
+
+/*! ../utils/index.js */
+
+/*! react */
+
+/*! ./DiffEditor.js */
+
+/*! ../hooks/useMount/index.js */
+
+/*! ../_virtual/_rollupPluginBabelHelpers.js */
+
+/*! react */
+
+/*! ../config/index.js */
+
+/*! @monaco-editor/loader */
+
+/*! ../MonacoContainer/index.js */
+
+/*! ./Editor.js */
+
+/*! ../hooks/useUpdate/index.js */
+
+/*! @monaco-editor/loader */
+
+/*! ./DiffEditor/index.js */
+
+/*! core-js/modules/esnext.async-iterator.map.js */
+
+/*! ../utils/deepMerge.js */
+
+/*! state-local */
+
+/*! ../_virtual/_rollupPluginBabelHelpers.js */
+
+/*! react */
+
+/*! ../utils/index.js */
+
+/*! ../hooks/useMount/index.js */
+
+/*! @monaco-editor/loader */
+
+/*! core-js/modules/es.array.unshift.js */
+
+/*! @rspress/core/runtime */
+
+/*! react/jsx-runtime */
+
+/*! ../utils/makeCancelable.js */
+
+/*! /Users/cmtlyt/code/package/base/dist */
+
+/*! react */
+
+/*! ../Loading/Loading.js */
+
+/*! react */
+
+/*! ./loader/index.js */
+
+/*! ../_virtual/_rollupPluginBabelHelpers.js */
