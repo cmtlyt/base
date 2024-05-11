@@ -159,16 +159,16 @@ function normalizeOptions(options = {}) {
   };
 }
 
-export class Logger {
-  /** @type {Logger} */
-  static instance = null;
+/** @type {Logger} */
+let instance = null;
 
+export class Logger {
   /**
    * @param {LoggerOptions} options
    * @returns {Logger}
    */
   static getInstance(options) {
-    return (Logger.instance ??= new Logger(options));
+    return (instance ??= new Logger(options));
   }
 
   /**
@@ -231,7 +231,7 @@ export class Logger {
    * @param {any[]} args
    * @returns {any[]}
    */
-  _removeIgnoreMessage(args) {
+  #_removeIgnoreMessage(args) {
     const ignoreMessage = this._ignoreMessage;
     return args.filter((item) => !ignoreMessage(item));
   }
@@ -240,7 +240,7 @@ export class Logger {
    * @param {any} moduleId
    * @returns {boolean}
    */
-  _checkOutputConditions(method, moduleId) {
+  #_checkOutputConditions(method, moduleId) {
     // 可输出的方法
     const checkMethod =
       !this._showMethods.length || this._showMethods.includes(method);
@@ -256,8 +256,8 @@ export class Logger {
    * @param {any[]} args
    * @returns {any[]}
    */
-  _formatOutputMessage(method, moduleId, date, args) {
-    args = this._removeIgnoreMessage(args);
+  #_formatOutputMessage(method, moduleId, date, args) {
+    args = this.#_removeIgnoreMessage(args);
     let messageTemplate = this._messageTemplate(args, moduleId, method, date);
     if (Array.isArray(messageTemplate)) return messageTemplate;
     const [preMessage, nextMessage] = messageTemplate.split('#[message]');
@@ -269,11 +269,11 @@ export class Logger {
    * @param {any} moduleId
    * @param {any[]} args
    */
-  _output(method, moduleId, args) {
-    if (!this._checkOutputConditions(method, moduleId)) return;
+  #_output(method, moduleId, args) {
+    if (!this.#_checkOutputConditions(method, moduleId)) return;
     const controller = this._controller;
     const date = new Date();
-    const messages = this._formatOutputMessage(method, moduleId, date, args);
+    const messages = this.#_formatOutputMessage(method, moduleId, date, args);
     const logInfo = {
       moduleId,
       method,
@@ -286,38 +286,38 @@ export class Logger {
     } catch (e) {
       logInfo.error = e;
     }
-    this._onOutput(logInfo);
+    this.#_onOutput(logInfo);
   }
   /**
    * @param {LogInfo} logInfo
    */
-  _onOutput(logInfo) {
+  #_onOutput(logInfo) {
     const outputListener = this._controller.onOutput;
     typeof outputListener === 'function' && outputListener(logInfo);
   }
   /** @type {LoggerFunc} */
   log(moduleId, ...args) {
-    this._output('log', moduleId, args);
+    this.#_output('log', moduleId, args);
     return this;
   }
   /** @type {LoggerFunc} */
   info(moduleId, ...args) {
-    this._output('info', moduleId, args);
+    this.#_output('info', moduleId, args);
     return this;
   }
   /** @type {LoggerFunc} */
   warn(moduleId, ...args) {
-    this._output('warn', moduleId, args);
+    this.#_output('warn', moduleId, args);
     return this;
   }
   /** @type {LoggerFunc} */
   error(moduleId, ...args) {
-    this._output('error', moduleId, args);
+    this.#_output('error', moduleId, args);
     return this;
   }
   /** @type {LoggerFunc} */
   debug(moduleId, ...args) {
-    this._output('debug', moduleId, args);
+    this.#_output('debug', moduleId, args);
     return this;
   }
   /**

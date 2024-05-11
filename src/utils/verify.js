@@ -127,3 +127,19 @@ export function isUrl(value) {
     isDataUrlString(value)
   );
 }
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isTrue(value) {
+  return value === true || String(value).toLowerCase() === 'true';
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isFalse(value) {
+  return value === false || String(value).toLowerCase() === 'false';
+}

@@ -21,3 +21,7 @@ export declare function isBlobUrlString(value: any): boolean;
 export declare function isDataUrlString(value: any): boolean;
 
 export declare function isUrl(value: any): boolean;
+
+export declare function isTrue(value: any): boolean;
+
+export declare function isFalse(value: any): boolean;

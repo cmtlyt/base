@@ -1,80 +1,62 @@
 /**
- * @param {string} type
- * @param {any} data
- */
-export function CustomEvent(type, data) {
-  if (new.target !== CustomEvent)
-    throw new Error(
-      'CustomEvent is a constructor and should be called with the `new` keyword'
-    );
-  this.type = type;
-  if (Array.isArray(data) && data.length === 1) data = data[0];
-  this.data = data;
-  this.removeListenerFlag = false;
-}
-
-CustomEvent.prototype = {
-  removeListener() {
-    this.removeListenerFlag = true;
-  },
-};
-
-/**
- * @constructor
- */
-export function EventEmitter() {
-  if (new.target !== EventEmitter)
-    throw new Error(
-      'EventEmitter is a constructor and should be called with the `new` keyword'
-    );
-  this.eventMap = {};
-}
-
-/**
  * @typedef {(event:CustomEvent)=>void} CallbackFunc
  */
 
-/**
- * @type {{
- *  on: (eventName:string, callback:CallbackFunc)=>EventEmitter,
- *  _run: (eventName:string, callback:CallbackFunc, event:CustomEvent)=>void
- *  emit: (eventName:string, ...args:any)=>EventEmitter,
- *  once: (eventName:string, callback:CallbackFunc)=>EventEmitter,
- *  off: (eventName:string, callback:CallbackFunc)=>EventEmitter,
- *  clear: (eventName:string)=>EventEmitter,
- *  clearAll: ()=>EventEmitter
- *  getFuncMap: ()=>{
- *  on: (eventName:string, callback:CallbackFunc)=>EventEmitter,
- *  emit: (eventName:string, ...args:any)=>EventEmitter,
- *  once: (eventName:string, callback:CallbackFunc)=>EventEmitter,
- *  off: (eventName:string, callback:CallbackFunc)=>EventEmitter,
- *  clear: (eventName:string)=>EventEmitter,
- *  clearAll: ()=>EventEmitter
- * }
- * }}
- */
-EventEmitter.prototype = {
+export class CustomEvent {
+  /**
+   * @param {string} type
+   * @param {any} data
+   */
+  constructor(type, data) {
+    this.type = type;
+    if (Array.isArray(data) && data.length === 1) data = data[0];
+    this.data = data;
+    this.removeListenerFlag = false;
+  }
+
+  removeListener() {
+    this.removeListenerFlag = true;
+  }
+}
+
+/** @type {EventEmitter} */
+let instance = null;
+
+export class EventEmitter {
+  /** @type {()=>EventEmitter} */
+  static getDetaultEmitter() {
+    return (instance ??= new EventEmitter());
+  }
+
+  constructor() {
+    this.eventMap = {};
+  }
+
+  /** @type {(eventName:string, callback:CallbackFunc)=>EventEmitter} */
   on(eventName, callback) {
     if (!this.eventMap[eventName]) {
       this.eventMap[eventName] = [];
     }
     this.eventMap[eventName].push(callback);
     return this;
-  },
-  _run(eventName, callback, event) {
+  }
+  /** @type {(eventName:string, callback:CallbackFunc, event:CustomEvent)=>void} */
+  #_run(eventName, callback, event) {
     callback.apply(null, event);
     if (event.removeListenerFlag) {
       this.off(eventName, callback);
     }
-  },
+  }
+  /** @type {(eventName:string, ...args:any)=>EventEmitter} */
   emit(eventName, ...args) {
     if (!this.eventMap[eventName]) return;
     const event = new CustomEvent(eventName, args);
     this.eventMap[eventName].forEach((callback) =>
-      this._run(eventName, callback, event)
+      this.#_run(eventName, callback, event)
     );
     return this;
-  },
+  }
+  /** @type {(eventName:string, callback:CallbackFunc)=>EventEmitter} */
   once(eventName, callback) {
     const onceCallback = (...args) => {
       callback.apply(null, args);
@@ -82,20 +64,33 @@ EventEmitter.prototype = {
     };
     this.on(eventName, onceCallback);
     return this;
-  },
+  }
+  /** @type {(eventName:string, callback:CallbackFunc)=>EventEmitter} */
   off(eventName, callback) {
     if (!this.eventMap[eventName]) return;
     this.eventMap[eventName].splice(this.eventMap[eventName].indexOf(callback));
     return this;
-  },
+  }
+  /** @type {(eventName:string)=>EventEmitter} */
   clear(eventName) {
     this.eventMap[eventName] = [];
     return this;
-  },
+  }
+  /** @type {()=>EventEmitter} */
   clearAll() {
     this.eventMap = {};
     return this;
-  },
+  }
+  /**
+   * @type {()=>{
+   *  on: (eventName:string, callback:CallbackFunc)=>EventEmitter,
+   *  emit: (eventName:string, ...args:any)=>EventEmitter,
+   *  once: (eventName:string, callback:CallbackFunc)=>EventEmitter,
+   *  off: (eventName:string, callback:CallbackFunc)=>EventEmitter,
+   *  clear: (eventName:string)=>EventEmitter,
+   *  clearAll: ()=>EventEmitter
+   * }}
+   */
   getFuncMap() {
     return {
       on: this.on.bind(this),
@@ -105,17 +100,5 @@ EventEmitter.prototype = {
       clear: this.clear.bind(this),
       clearAll: this.clearAll.bind(this),
     };
-  },
-};
-
-EventEmitter.instance = null;
-
-/**
- * @returns {EventEmitter}
- */
-EventEmitter.getDetaultEmitter = () => {
-  if (!EventEmitter.instance) {
-    EventEmitter.instance = new EventEmitter();
   }
-  return EventEmitter.instance;
-};
+}

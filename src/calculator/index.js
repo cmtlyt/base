@@ -1,10 +1,13 @@
 export class Calculator {
+  #_last;
+  #_result;
+
   /**
    * @param {number} initValue
    */
   constructor(initValue = 0) {
-    this.last = initValue;
-    this.result = 0;
+    this.#_last = initValue;
+    this.#_result = 0;
   }
   /**
    * @param {(calc: Calculator)=>void|Calculator|number} func
@@ -21,8 +24,8 @@ export class Calculator {
    * @returns {Calculator}
    */
   add(value) {
-    this.result = this.result + this.last;
-    this.last = value;
+    this.#_result = this.#_result + this.#_last;
+    this.#_last = value;
     return this;
   }
   /**
@@ -30,8 +33,8 @@ export class Calculator {
    * @returns {Calculator}
    */
   sub(value) {
-    this.result = this.result + this.last;
-    this.last = -value;
+    this.#_result = this.#_result + this.#_last;
+    this.#_last = -value;
     return this;
   }
   /**
@@ -39,7 +42,7 @@ export class Calculator {
    * @returns {Calculator}
    */
   mut(value) {
-    this.last *= value;
+    this.#_last *= value;
     return this;
   }
   /**
@@ -47,21 +50,21 @@ export class Calculator {
    * @returns {Calculator}
    */
   div(value) {
-    this.last /= value;
+    this.#_last /= value;
     return this;
   }
   /**
    * @returns {number}
    */
   getCurrValue() {
-    return this.result + this.last;
+    return this.#_result + this.#_last;
   }
   /**
    * @returns {number}
    */
   valueOf() {
-    this.last = this.result + this.last;
-    this.result = 0;
-    return this.last;
+    this.#_last = this.#_result + this.#_last;
+    this.#_result = 0;
+    return this.#_last;
   }
 }

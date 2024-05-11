@@ -56,8 +56,6 @@ interface LoggerFuncMaps {
 type ModuleId = unknown;
 
 export declare class Logger {
-  static instance: Logger;
-
   static getInstance(options?: LoggerOptions): Logger;
 
   constructor(options?: LoggerOptions);
