@@ -60,4 +60,8 @@ module.exports = {
       ],
     }),
   ],
+  optimization: {
+    mangleExports: 'size',
+    moduleIds: 'size',
+  },
 };

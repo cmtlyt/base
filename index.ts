@@ -1,4 +1,4 @@
-import { getCallStack } from './src';
+import { getCallStack } from './dist';
 
 function test() {
   console.log(getCallStack());
