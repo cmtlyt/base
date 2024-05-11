@@ -11,6 +11,7 @@
 |      | controller | 存储控制器 | IStoreController | `DefaultStoreController` |
 
 :::details 类型补充
+
 **IStoreController**
 
 ```ts
@@ -30,6 +31,7 @@ interface IStoreController {
 `IStorePoolHandle` 对象
 
 :::details 类型补充
+
 **IStorePoolHandle**
 
 ```ts
@@ -55,5 +57,6 @@ interface IStorePoolHandle {
   // 清空监听
   clearEvents: () => void;
 }
-:::
 ```
+
+:::
