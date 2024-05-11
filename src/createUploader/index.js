@@ -16,6 +16,7 @@ import { getType, isBlob, isFile, isUrl } from '../utils/verify';
  *  requestMethod?: 'POST'|'PUT'
  *  headers?: Record<string, string>
  *  bodyHandler?: (data:{ chunk: Blob, chunkIdx: number }) => Record<string,any>;
+ *  requestOptions?: RequestInit
  * }} UploadOptions
  * @typedef {File|Blob|string} FileLive
  * @typedef {{
@@ -34,6 +35,7 @@ import { getType, isBlob, isFile, isUrl } from '../utils/verify';
  *  chunkIdxs: number[];
  *  retryCount: number;
  *  dataType: 'FormData'
+ *  requestOptions?: RequestInit
  * }} UploadInfo
  * @typedef {{
  *  status: 'success'|'fail'|'error';
@@ -60,6 +62,11 @@ import { getType, isBlob, isFile, isUrl } from '../utils/verify';
  *  errorChunks: number[]
  *  customOption:any
  * }} UploadResult
+ * @typedef {(options: {
+ *  chunk: Blob,
+ *  chunkIdx: number,
+ *  customOption: any,
+ * }) => Promise<Record<string,any>>} BodyHandler
  */
 
 // 允许的上传请求体格式
@@ -117,6 +124,7 @@ function normalizeOptions(options) {
     requestMethod = 'POST',
     headers = {},
     bodyHandler = () => {},
+    requestOptions = {},
   } = options;
   const normalizedOptions = {
     url,
@@ -154,6 +162,7 @@ function normalizeOptions(options) {
     ),
     headers: cast('headers', 'object', headers, {}),
     bodyHandler: cast('bodyHandler', 'function', bodyHandler, () => {}),
+    requestOptions: cast('requestOptions', 'object', requestOptions, {}),
   };
   return normalizedOptions;
 }
@@ -175,6 +184,7 @@ const _uploadHandle = async ({
   chunkIdxs: _chunkIdxs,
   retryCount,
   dataType,
+  requestOptions,
 }) => {
   const errorIdxs = [];
   const file = await fetch(fileUrl).then((res) => res.blob());
@@ -230,7 +240,7 @@ const _uploadHandle = async ({
       uploadInfo,
     });
   };
-  /** @type {(options:{ chunk: Blob, chunkIdx: number, customOption: any }) => Promise<Record<string,any>>} */
+  /** @type {BodyHandler} */
   // @ts-ignore
   const _userBodyHandler = userBodyHandler || (() => {});
   // 表单请求体处理
@@ -264,7 +274,12 @@ const _uploadHandle = async ({
   const run = async (chunkIdxs) => {
     for (const idx of chunkIdxs) {
       const body = await bodyHandler(idx);
-      await fetch(serverPath, { method: requestMethod, body, headers })
+      await fetch(serverPath, {
+        ...requestOptions,
+        method: requestMethod,
+        body,
+        headers,
+      })
         .then(fetchHandle.bind(null, idx))
         .catch(fetchErrorHandle.bind(null, idx));
     }
@@ -341,10 +356,16 @@ class UploadController {
 
   /**
    * @param {UploadOptions} options
+   * @param {boolean} forceCreate
    * @returns {UploadController}
    */
-  static getInstance(options) {
+  static getInstance(options, forceCreate = false) {
     const { url } = options;
+    if (forceCreate) {
+      return (UploadController.instanceMap[url] = new UploadController(
+        options
+      ));
+    }
     return (UploadController.instanceMap[url] ??= new UploadController(
       options
     ));
@@ -641,9 +662,10 @@ class UploadController {
 }
 /**
  * @param {UploadOptions} options
+ * @param {boolean} forceCreate
  * @returns {UploadController}
  */
-export function createUploader(options) {
+export function createUploader(options, forceCreate = false) {
   const normalizedOptions = normalizeOptions(options);
-  return UploadController.getInstance(normalizedOptions);
+  return UploadController.getInstance(normalizedOptions, forceCreate);
 }

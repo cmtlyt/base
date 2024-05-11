@@ -9,6 +9,7 @@ interface IUploadControllerOptions {
   retryCount?: number;
   requestMethod?: 'POST' | 'PUT';
   headers?: Record<string, string>;
+  requestOptions?: RequestInit;
   /**
    * # 禁止使用闭包！！！
    */
@@ -61,5 +62,6 @@ declare class UploadController {
 }
 
 export declare function createUploader(
-  options: IUploadControllerOptions
+  options: IUploadControllerOptions,
+  forceCreate?: boolean
 ): UploadController;

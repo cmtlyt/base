@@ -9,6 +9,26 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.5
+
+新增
+
+- (D) utils
+  - (F) apply
+  - (F) construct
+  - (F) defineProperty
+  - (F) deleteProperty
+  - (F) get
+  - (F) getOwnPropertyDescriptor
+  - (F) getPrototypeOf
+  - (F) has
+  - (F) isExtensible
+  - (F) ownKeys
+  - (F) preventExtensions
+  - (F) set
+  - (F) setPrototypeOf
+- `createUploader` 支持用户自定义 `fetch` 参数
+
 ### v0.5.4
 
 新增

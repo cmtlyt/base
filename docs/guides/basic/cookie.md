@@ -2,6 +2,8 @@
 
 ## cookie - (object)
 
+Cookie 管理器, 可以通过该对象的方法操作 Cookie
+
 ### cookie.get - (function)
 
 获取 cookie

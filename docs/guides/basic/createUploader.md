@@ -2,23 +2,25 @@
 
 ## createUploader - (function)
 
-创建一个上传管理器
+创建一个上传管理器, 支持并发上传, 可以调整并发的类型, 例如按分片并发, 或者按文件并发, 自动管理上传状态, 并且返回上传进度信息, 内部使用 fetch 实现文件上传, 可自行传递 headers 和 fetch 的配置, 并且支持通过函数自定义请求体
 
 ### 参数
 
-| 必填 | 参数名         | 说明         | 类型                   | 默认值       |
-| :--: | -------------- | ------------ | ---------------------- | ------------ |
-|  \*  | url            | 上传地址     | string                 |              |
-|      | maxConcurrent  | 最大并发数   | number                 | 3            |
-|      | concurrentNode | 并发节点类型 | 'file'\|'chunk'        | 'chunk'      |
-|      | chunkSize      | 分片大小     | number                 | 1024 \* 1024 |
-|      | dataType       | 数据类型     | 'FormData'             | 'FormData'   |
-|      | dataKey        | 数据 key     | string                 | 'file'       |
-|      | responseType   | 响应类型     | 'json'                 | 'json'       |
-|      | retryCount     | 重试次数     | number                 | 3            |
-|      | requestMethod  | 请求方法     | 'POST'                 | 'POST'       |
-|      | headers        | 请求头       | Record<string, string> | {}           |
-|      | bodyHandler    | 自定义请求体 | TBodyHanderFunc        | -            |
+| 必填 | 参数名                 | 说明          | 类型                   | 默认值       |
+| :--: | ---------------------- | ------------- | ---------------------- | ------------ |
+|  \*  | options                | uploader 配置 | string                 |              |
+|  \*  | options.url            | 上传地址      | string                 |              |
+|      | options.maxConcurrent  | 最大并发数    | number                 | 3            |
+|      | options.concurrentNode | 并发节点类型  | 'file'\|'chunk'        | 'chunk'      |
+|      | options.chunkSize      | 分片大小      | number                 | 1024 \* 1024 |
+|      | options.dataType       | 数据类型      | 'FormData'             | 'FormData'   |
+|      | options.dataKey        | 数据 key      | string                 | 'file'       |
+|      | options.responseType   | 响应类型      | 'json'                 | 'json'       |
+|      | options.retryCount     | 重试次数      | number                 | 3            |
+|      | options.requestMethod  | 请求方法      | 'POST'                 | 'POST'       |
+|      | options.headers        | 请求头        | Record<string, string> | {}           |
+|      | options.bodyHandler    | 自定义请求体  | TBodyHanderFunc        | -            |
+|      | forceCreate            | 强制创建实例  | boolean                | false        |
 
 :::details 类型补充
 

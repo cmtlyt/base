@@ -2,6 +2,8 @@
 
 ## clipboard - (object)
 
+剪切板对象, 可以通过该对象的方法操作剪切板
+
 ### clipboard.copy - (function)
 
 复制文本
