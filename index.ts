@@ -1,50 +1,51 @@
-import { getCallStack } from './dist';
 
-function test() {
-  console.log(getCallStack());
-}
+// import { getCallStack } from './dist';
 
-function a() {
-  test();
-}
+// function test() {
+//   console.log(getCallStack());
+// }
 
-function b() {
-  a();
-}
+// function a() {
+//   test();
+// }
 
-function c() {
-  b();
-}
+// function b() {
+//   a();
+// }
 
-function d() {
-  c();
-}
+// function c() {
+//   b();
+// }
 
-function e() {
-  d();
-}
+// function d() {
+//   c();
+// }
 
-function f() {
-  e();
-}
+// function e() {
+//   d();
+// }
 
-function g() {
-  f();
-}
+// function f() {
+//   e();
+// }
 
-function h() {
-  g();
-}
+// function g() {
+//   f();
+// }
 
-function i() {
-  h();
-}
+// function h() {
+//   g();
+// }
 
-function j() {
-  i();
-}
+// function i() {
+//   h();
+// }
 
-j();
+// function j() {
+//   i();
+// }
+
+// j();
 
 // import { createPool } from './src/createPool';
 

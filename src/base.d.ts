@@ -41,3 +41,5 @@ type TLastTwoArg<T extends any[]> = T extends [...any, infer I, any] ? I : any;
 type THeadTwoArg<T extends any[]> = T extends [any, infer I, ...any] ? I : any;
 
 type TObject<T> = Record<string | symbol | number, T>;
+
+type TArrayItem<T> = T extends [...infer R] ? R : T;

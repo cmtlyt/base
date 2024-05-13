@@ -4,8 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .test {
+        position: fixed;
+        top: 30px;
+        left: 100px;
+        width: 100px;
+        height: 20px;
+        background-color: blue;
+        margin-left: 0;
+        animation: change 2s infinite alternate;
+      }
+      @keyframes change {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(300px);
+        }
+      }
+    </style>
   </head>
   <body>
+    <div class="test"></div>
     <script type="module" src="./index.ts"></script>
   </body>
 </html>

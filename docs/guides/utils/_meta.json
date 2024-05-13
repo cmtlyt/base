@@ -3,6 +3,7 @@
   "array",
   "cache",
   "constant",
+  "date",
   "fp",
   "sequential",
   "string",
