@@ -402,3 +402,36 @@ isUrl('tel://cmtlyt.com'); // false
 isUrl('data://cmtlyt.com'); // true
 isUrl('data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D'); // true
 ```
+
+## isAsyncFunc
+
+判断是否为异步函数
+
+**类型声明**
+
+```ts
+function isAsyncFunc(value: any): boolean;
+```
+
+**参数**
+
+| 必填 | 参数名 | 类型 | 描述       | 默认值 |
+| :--: | ------ | ---- | ---------- | ------ |
+|  \*  | value  | any  | 待判断的值 | -      |
+
+**返回值**: `boolean`
+
+**示例**
+
+```ts
+import { isAsyncFunc } from '@cmtlyt/base';
+// import { isAsyncFunc } from '@cmtlyt/base/utils/verify';
+
+isAsyncFunc(async () => {}); // true
+isAsyncFunc(() => {}); // false
+isAsyncFunc(async function () {}); // true
+isAsyncFunc(function () {}); // false
+isAsyncFunc(class {}); // false
+isAsyncFunc(Promise.resolve()); // false
+isAsyncFunc({ then() {} }); // false
+```

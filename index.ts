@@ -1,4 +1,12 @@
-import { chunkTask, apply } from './src';
+import { chunkTask, apply, isAsyncFunc } from './src';
+
+console.log(isAsyncFunc(async () => {})); // true
+console.log(isAsyncFunc(() => {})); // false
+console.log(isAsyncFunc(async function () {})); // true
+console.log(isAsyncFunc(function () {})); // false
+console.log(isAsyncFunc(class {})); // false
+console.log(isAsyncFunc(Promise.resolve())); // false
+console.log(isAsyncFunc({ then() {} })); // false
 
 const run = chunkTask<number>((i) => {
   const dom = document.createElement('div');

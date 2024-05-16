@@ -43,7 +43,7 @@ export function isPromise(value) {
  */
 export function getType(value) {
   const baseType = typeof value;
-  if (baseType !== 'object') return baseType;
+  if (baseType !== 'object' && baseType !== 'function') return baseType;
   return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
 }
 
@@ -142,4 +142,12 @@ export function isTrue(value) {
  */
 export function isFalse(value) {
   return value === false || String(value).toLowerCase() === 'false';
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isAsyncFunc(value) {
+  return getType(value) === 'asyncfunction';
 }

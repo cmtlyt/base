@@ -25,3 +25,5 @@ export declare function isUrl(value: any): boolean;
 export declare function isTrue(value: any): boolean;
 
 export declare function isFalse(value: any): boolean;
+
+export declare function isAsyncFunc(value: any): boolean;
