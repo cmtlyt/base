@@ -1,3 +1,29 @@
+import { chunkTask, apply } from './src';
+
+const run = chunkTask<number>((i) => {
+  const dom = document.createElement('div');
+  dom.innerHTML = i.toString();
+  document.body.prepend(dom);
+  return Promise.resolve(i);
+});
+
+console.time('run chunk task');
+run<number[]>(Array.from({ length: 100 }, (_, i) => i + Math.random())).then(
+  (res) => {
+    console.timeEnd('run chunk task');
+    console.log(res);
+  }
+);
+
+const num = apply(
+  function (a, b, c, d) {
+    return a + b + c + d + this.e;
+  },
+  { e: 5 },
+  [1, 2, 3, 4]
+);
+
+console.log(num);
 
 // import { getCallStack } from './dist';
 

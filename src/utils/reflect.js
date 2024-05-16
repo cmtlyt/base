@@ -1,3 +1,4 @@
+import { getArray } from './array';
 import { cacheByReturn } from './cache';
 
 /**
@@ -9,10 +10,11 @@ import { cacheByReturn } from './cache';
  */
 export const apply = cacheByReturn(() => {
   if (Reflect?.apply) {
-    return Reflect.apply;
+    return (target, thisArg, args) =>
+      Reflect.apply(target, thisArg, getArray(args));
   }
-  return (target, thisArg, argumentsList) => {
-    return target.apply(thisArg, argumentsList);
+  return (target, thisArg, args) => {
+    return target.apply(thisArg, getArray(args));
   };
 });
 

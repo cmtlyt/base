@@ -1,4 +1,6 @@
 import { cacheByReturn } from './cache';
+import { getNow } from './date';
+import { apply } from './reflect';
 
 /**
  * @template {(...args:any[])=>void} T
@@ -59,4 +61,81 @@ export function throttle(func, time = 100, immediately = true) {
       }, time);
     };
   });
+}
+
+const _runTask = cacheByReturn(() => {
+  if (requestIdleCallback) {
+    return (task, args, resolve, reject) => {
+      requestIdleCallback((idle) => {
+        if (idle.timeRemaining() > 0) {
+          try {
+            const result = apply(task, null, args);
+            resolve(result);
+          } catch (error) {
+            reject(error);
+          }
+        } else {
+          _runTask(task, args, resolve, reject);
+        }
+      });
+    };
+  }
+  if (requestAnimationFrame) {
+    return (task, args, resolve, reject) => {
+      const start = getNow();
+      requestAnimationFrame(() => {
+        if (getNow() - start < 16.6) {
+          try {
+            const result = apply(task, null, args);
+            resolve(result);
+          } catch (error) {
+            reject(error);
+          }
+        } else {
+          _runTask(task, args, resolve, reject);
+        }
+      });
+    };
+  }
+  return (task, args, resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const result = apply(task, null, args);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    }, 0);
+  };
+});
+
+/**
+ * @template T
+ * @template R
+ * @param {(arg:T)=>R} task
+ * @returns {(datas:T[]|number)=>Promise<R[]>}
+ */
+export function chunkTask(task) {
+  return (datas) => {
+    const results = [];
+    return new Promise(async (resolve, reject) => {
+      const func = async (args) => {
+        return new Promise(_runTask.bind(null, task, args)).then(
+          (res) => results.push(res),
+          reject
+        );
+      };
+      if (typeof datas === 'number') {
+        for (let i = 0; i < datas; ++i) {
+          await func(i);
+        }
+      } else if (Array.isArray(datas)) {
+        for (const key in datas) {
+          const data = datas[key];
+          await func(data);
+        }
+      }
+      resolve(results);
+    });
+  };
 }
