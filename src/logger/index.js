@@ -2,6 +2,7 @@ import { isNull } from '../utils/verify';
 import { getArray } from '../utils/array';
 import { cacheByReturn } from '../utils/cache';
 import { formatDate } from '../utils/date';
+import { warning } from '../warning';
 
 /**
  * @typedef {(moduleId:any, ...args:any[]) => void} ControllerFunc
@@ -72,7 +73,7 @@ function getController(controller, backController = null) {
     return backController;
   }
   const { defaultController, controllerMethods } = CONSTANT;
-  console.warn(
+  warning(
     `控制器至少得实现[${controllerMethods}]等方法,已使用默认控制器\`${defaultController}\`替代`
   );
   return defaultController;
@@ -91,9 +92,7 @@ function getMessageTemplate(messageTemplate) {
   ) {
     currTemplate = messageTemplate;
   } else {
-    console.warn(
-      `消息模板中没有消息的占位符,已使用默认模板\`${currTemplate}\`替代`
-    );
+    warning(`消息模板中没有消息的占位符,已使用默认模板\`${currTemplate}\`替代`);
   }
   const { moduleIdReg, methodReg, dateReg } = CONSTANT;
   return (_, moduleId, method, date) => {
@@ -129,7 +128,7 @@ function getShowMethods(showMethods, controller) {
   showMethods = getArray(showMethods);
   return showMethods.filter((method) => {
     const has = method in controller;
-    if (!has) console.warn(`传入的控制器中不存在${method}方法,已自动排除`);
+    if (!has) warning(`传入的控制器中不存在${method}方法,已自动排除`);
     return has;
   });
 }

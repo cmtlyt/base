@@ -1,8 +1,12 @@
-import { chunkTask, apply, isAsyncFunc } from './src';
+import { chunkTask, apply, isAsyncFunc } from './dist';
 
 console.log(isAsyncFunc(async () => {})); // true
 console.log(isAsyncFunc(() => {})); // false
 console.log(isAsyncFunc(async function () {})); // true
+
+// @ts-ignore
+window.__ClConfig__.disableWarning = true;
+
 console.log(isAsyncFunc(function () {})); // false
 console.log(isAsyncFunc(class {})); // false
 console.log(isAsyncFunc(Promise.resolve())); // false

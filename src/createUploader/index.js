@@ -3,6 +3,7 @@ import { createWorkerFunc } from '../createWorkerFunc';
 import { createLinkByString, getRandomString } from '../utils/string';
 import { getArraySlice } from '../utils/array';
 import { getType, isBlob, isFile, isUrl } from '../utils/verify';
+import { warning } from '../warning';
 
 /**
  * @typedef {{
@@ -96,9 +97,7 @@ function cast(key, type, value, defaultValue, allowedTypes = null) {
     // 允许值判断
     (allowedTypes && !allowedTypes.includes(value))
   ) {
-    console.warn(
-      `options.${key} 必须是${type}，已使用默认值 ${defaultValue} 代替`
-    );
+    warning(`options.${key} 必须是${type}，已使用默认值 ${defaultValue} 代替`);
     return defaultValue;
   }
   return value;

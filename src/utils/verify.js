@@ -1,3 +1,4 @@
+import { warning } from '../warning';
 import { cacheByReturn } from './cache';
 import { EMPTY } from './constant';
 
@@ -149,5 +150,8 @@ export function isFalse(value) {
  * @returns {boolean}
  */
 export function isAsyncFunc(value) {
+  warning(
+    '该方法存在生产环境和开发环境结果不一致风险, 请谨慎使用, 例如使用 babel 转换后 async 函数会变成普通函数'
+  );
   return getType(value) === 'asyncfunction';
 }

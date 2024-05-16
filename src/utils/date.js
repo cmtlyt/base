@@ -1,3 +1,4 @@
+import { warning } from '../warning';
 import { cacheByReturn } from './cache';
 
 /**
@@ -6,7 +7,7 @@ import { cacheByReturn } from './cache';
  * @returns {string}
  */
 export function formatDate(date = new Date(), format) {
-  console.warn('未来会实现~');
+  warning('未来会实现~');
   if (!format) return date.valueOf() + '';
   // todo format
   return date.toLocaleString();

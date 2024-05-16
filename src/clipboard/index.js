@@ -1,4 +1,5 @@
 import { cacheByReturn } from '../utils/cache';
+import { warning } from '../warning';
 
 /**
  * @returns {boolean}
@@ -53,7 +54,7 @@ const copy = cacheByReturn(() => {
     };
   }
   return (text) => {
-    console.warn('copy not supported:> ', text);
+    warning('copy not supported:> ', text);
   };
 });
 
@@ -77,7 +78,7 @@ const paste = cacheByReturn(() => {
     };
   }
   return () => {
-    console.warn('paste not supported');
+    warning('paste not supported');
     return Promise.reject('paste not supported');
   };
 });
@@ -100,7 +101,7 @@ const clear = cacheByReturn(() => {
     };
   }
   return () => {
-    console.warn('clear not supported');
+    warning('clear not supported');
   };
 });
 

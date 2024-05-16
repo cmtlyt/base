@@ -9,6 +9,11 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.10
+
+全局添加可控警告
+通过 `window.__ClConfig__.disableWarning` 控制
+
 ### v0.5.9
 
 新增
