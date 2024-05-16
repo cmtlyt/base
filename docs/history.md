@@ -15,6 +15,7 @@
 
 - (D) utils
   - (F) chunkTask
+  - (F) isAsyncFunc
 
 修复
 
