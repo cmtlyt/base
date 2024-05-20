@@ -1,10 +1,23 @@
-import { asyncReplace, sleep } from './src';
+import { createPool } from './dist';
 
-asyncReplace('123', /\d/g, async (...args) => {
-  console.log(args);
-  await sleep(1000);
-  return '2';
-}).then(console.log);
+const p = createPool((i) => ({
+  number: i,
+}));
+
+p.get().then((item) => {
+  const { data } = item;
+  console.log(item, data(), item.data());
+  item.unUse();
+  console.log(item.data());
+});
+
+// import { asyncReplace, sleep } from './src';
+
+// asyncReplace('123', /\d/g, async (...args) => {
+//   console.log(args);
+//   await sleep(1000);
+//   return '2';
+// }).then(console.log);
 
 // import { chunkTask, apply, isAsyncFunc } from './dist';
 

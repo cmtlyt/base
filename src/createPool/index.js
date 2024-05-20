@@ -6,8 +6,9 @@ import { EMPTY } from '../utils/constant';
  *  data:any;
  *  __id:string;
  * }} PoolItem
+ * @typedef {{data:()=>any, unUse:()=>void}} StoreItem
  * @typedef {{
- *  resolve: (item: {data:any, unUse:()=>void})=>void;
+ *  resolve: (item: StoreItem)=>void;
  *  reject: (reason?: any) => void;
  * }} WaitingItem
  */
@@ -37,13 +38,13 @@ class Pool {
 
   /**
    * @param {number} size
-   * @param {()=>any} initFunction
+   * @param {(idx:number)=>any} initFunction
    * @param {string|symbol} poolId
    */
   constructor(size = 5, initFunction = () => EMPTY, poolId = Symbol()) {
     this.#_poolId = poolId;
-    this.#_pool = Array.from({ length: size }, () =>
-      this.#_genItem(initFunction())
+    this.#_pool = Array.from({ length: size }, (_, i) =>
+      this.#_genItem(initFunction(i))
     );
     this.#_waiting = [];
     this.usableCount = this.#_pool.reduce((prev, cur) => {
@@ -85,7 +86,7 @@ class Pool {
   }
   /**
    * @param {number} index
-   * @returns {Promise<{data:any, unUse:()=>void}>}
+   * @returns {Promise<StoreItem>}
    */
   async #_genReturn(index) {
     if (this.isClose) throw new Error('池子已关闭');
@@ -106,22 +107,33 @@ class Pool {
       if (__id !== item.__id) throw new Error('数据已被返还');
     };
     const unUse = () => {
-      canIUse();
       this.#_putItem(data, index);
     };
 
     --this.usableCount;
 
-    return Promise.resolve({
-      get data() {
-        canIUse();
-        return data;
+    const dataHandler = function () {
+      if (this !== itemHandler) return;
+      canIUse();
+      return data;
+    };
+
+    const unUseHandler = function () {
+      if (this !== itemHandler) return;
+      canIUse();
+      return unUse();
+    };
+
+    const itemHandler = {
+      data() {
+        return dataHandler.call(this);
       },
-      get unUse() {
-        canIUse();
-        return unUse;
+      unUse() {
+        return unUseHandler.call(this);
       },
-    });
+    };
+
+    return Promise.resolve(itemHandler);
   }
 
   /**

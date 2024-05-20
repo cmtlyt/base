@@ -20,7 +20,7 @@
 
 ```ts
 interface IPoolItem<T> {
-  data: T;
+  data: () => T;
   unUse: () => void;
 }
 
@@ -40,13 +40,13 @@ interface Pool<T = any> {
 ```
 
 :::danger 警告
-`get` 返回的 `IPoolItem` 对象禁止解构和赋值，会影响管理
+`get` 返回的 `IPoolItem` 对象不建议和赋值，可能会影响管理
 
 **示例**
 
 ```js
 const item = await pool.get();
-// 禁止解构或赋值
+// 不建议或赋值
 const data = item.data; // 🈲
 const { data } = item; // 🈲
 ```

@@ -1,22 +1,22 @@
 interface IPoolItem<T> {
   /**
-   * ### 禁止对该属性进行解构和赋值，会影响管理
+   * ### 不建议对该属性进行解构和赋值，会影响管理
    *
    * ```
-   * // 赋值（禁止！！！）
+   * // 赋值（不建议！！！）
    * const data = item.data
-   * // 解构（禁止！！！）
+   * // 解构（不建议！！！）
    * const { data } = item
    * ```
    */
-  data: T;
+  data: () => T;
   /**
-   * ### 禁止对该属性进行解构和赋值，会影响管理
+   * ### 不建议对该属性进行解构和赋值，会影响管理
    *
    * ```
-   * // 赋值（禁止！！！）
+   * // 赋值（不建议！！！）
    * const unUse = item.unUse
-   * // 解构（禁止！！！）
+   * // 解构（不建议！！！）
    * const { unUse } = item
    * ```
    */
@@ -30,12 +30,12 @@ declare class Pool<T = any> {
   constructor(size: number, initFunction?: () => T, poolId?: string | symbol);
 
   /**
-   * 禁止对返回值进行解构和赋值，会影响管理
+   * 不建议对返回值进行解构和赋值，会影响管理
    *
    * ```
-   * // 赋值（禁止！！！）
+   * // 赋值（不建议！！！）
    * const data = item.data
-   * // 解构（禁止！！！）
+   * // 解构（不建议！！！）
    * const { data } = item
    * ```
    */
@@ -45,7 +45,7 @@ declare class Pool<T = any> {
 }
 
 export declare function createPool<T>(
-  initFunction: () => T,
+  initFunction: (idx: number) => T,
   size?: number,
   poolId?: string | symbol
 ): Pool<T>;
