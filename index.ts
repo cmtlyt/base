@@ -1,15 +1,23 @@
-import { createPool } from './dist';
+// import { merge, cloneMerge } from './src';
 
-const p = createPool((i) => ({
-  number: i,
-}));
+// const a = {};
 
-p.get().then((item) => {
-  const { data } = item;
-  console.log(item, data(), item.data());
-  item.unUse();
-  console.log(item.data());
-});
+// const b = merge(a, { b: 1 }, { c: 2 }, { d: { e: 1, f: [1, 2, 4, { g: 5 }] } });
+
+// console.log(a, b, a === b);
+
+// import { createPool } from './dist';
+
+// const p = createPool((i) => ({
+//   number: i,
+// }));
+
+// p.get().then((item) => {
+//   const { data } = item;
+//   console.log(item, data(), item.data());
+//   item.unUse();
+//   console.log(item.data());
+// });
 
 // import { asyncReplace, sleep } from './src';
 

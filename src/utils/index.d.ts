@@ -7,3 +7,4 @@ export * from './verify';
 export * from './sequential';
 export * from './fp';
 export * from './reflect';
+export * from './other';
