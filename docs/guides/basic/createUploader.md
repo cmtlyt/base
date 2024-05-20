@@ -13,12 +13,14 @@
 |      | options.maxConcurrent  | 最大并发数    | number                 | 3            |
 |      | options.concurrentNode | 并发节点类型  | 'file'\|'chunk'        | 'chunk'      |
 |      | options.chunkSize      | 分片大小      | number                 | 1024 \* 1024 |
-|      | options.dataType       | 数据类型      | 'FormData'             | 'FormData'   |
+|      | options.dataType       | 数据类型      | 'FormData'\|'binary'   | 'FormData'   |
 |      | options.dataKey        | 数据 key      | string                 | 'file'       |
 |      | options.responseType   | 响应类型      | 'json'                 | 'json'       |
 |      | options.retryCount     | 重试次数      | number                 | 3            |
 |      | options.requestMethod  | 请求方法      | 'POST'                 | 'POST'       |
 |      | options.headers        | 请求头        | Record<string, string> | {}           |
+|      | options.bodyHandler    | 自定义请求体  | TBodyHanderFunc        | -            |
+|      | options.headersHandler | 自定义请求体  | THeadersHandler        | -            |
 |      | options.bodyHandler    | 自定义请求体  | TBodyHanderFunc        | -            |
 |      | forceCreate            | 强制创建实例  | boolean                | false        |
 
@@ -30,12 +32,18 @@ type TBodyHanderFunc = (body: {
   chunkIdx: number;
   customOption: any;
 }) => Record<string, any>;
+type THeadersHandler = (body: {
+  chunkIdx: number;
+  currentHeanders: Record<string, any>;
+  customOption: any;
+}) => Record<string, any> | Promise<Record<string, any>>;
 ```
 
 :::
 
 :::danger 警告
 `TBodyHanderFunc` 禁止使用闭包
+`THeadersHanderFunc` 禁止使用闭包
 :::
 
 ### 返回值

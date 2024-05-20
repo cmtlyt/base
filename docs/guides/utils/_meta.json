@@ -5,8 +5,9 @@
   "constant",
   "date",
   "fp",
+  "other",
+  "reflect",
   "sequential",
   "string",
-  "verify",
-  "reflect"
+  "verify"
 ]

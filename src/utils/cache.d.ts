@@ -9,5 +9,5 @@ export declare function cacheByReturn<F extends () => any>(
 
 export declare function memoize<F extends TAnyFunc>(
   func: F,
-  resolver: (...args: TArgsType<F>) => any
+  resolver?: (...args: TArgsType<F>) => any
 ): F;

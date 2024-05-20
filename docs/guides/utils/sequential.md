@@ -131,3 +131,32 @@ const task = async (arg: number) => {
 const chunkedTask = chunkTask(task);
 chunkedTask([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
+
+## sleep
+
+等待指定时间
+
+**类型声明**
+
+```ts
+function sleep(time: number): Promise<void>;
+```
+
+**参数**
+
+| 必填 | 参数名 | 说明 | 类型   | 默认值 |
+| :--: | ------ | ---- | ------ | ------ |
+|  \*  | time   | 时间 | number | -      |
+
+**返回值**: `Promise<void>`
+
+**示例**
+
+```ts
+import { sleep } from '@cmtlyt/base';
+// import { sleep } from '@cmtlyt/base/utils/sequential';
+
+sleep(1000).then(() => {
+  console.log('hello');
+});
+```

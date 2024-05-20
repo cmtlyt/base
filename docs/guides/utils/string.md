@@ -134,3 +134,40 @@ const className2 = gc('a', 'b', { c: true }, ['d', { e: false, f: true }]);
 console.log('className:', className); // className: "a b c d f"
 console.log('className2:', className2); // className2: "a b c d f"
 ```
+
+## asyncReplace
+
+异步替换
+
+**类型声明**
+
+```ts
+function asyncReplace(
+  str: string,
+  pattern: string | RegExp,
+  replacer:
+    | ((match: string, ...args: any[]) => Promise<string> | string)
+    | string
+): Promise<string>;
+```
+
+**参数**
+
+| 必填 | 参数     | 说明     | 类型                                                         | 默认值 |
+| :--: | -------- | -------- | ------------------------------------------------------------ | ------ |
+|  \*  | str      | 字符串   | string                                                       | -      |
+|  \*  | pattern  | 正则     | string\|RegExp                                               | -      |
+|  \*  | replacer | 替换函数 | (match: string, ...args: any[]) => Promise<string> \| string | -      |
+
+**返回值**: `Promise<string>`
+
+**示例**
+
+```js
+import { asyncReplace } from '@cmtlyt/base';
+// import { asyncReplace } from '@cmtlyt/base/utils/string'
+
+asyncReplace('hello world', 'world', async (match) => {
+  return '@cmtlyt/base';
+}); // hello @cmtlyt/base
+```
