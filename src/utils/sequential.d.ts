@@ -12,3 +12,5 @@ export declare function chunkTask<
 >(
   task: F
 ): <R extends TUnwrapPromise<ReturnType<F>>>(args: T[] | number) => Promise<R>;
+
+export declare const sleep: (time: number) => Promise<void>;

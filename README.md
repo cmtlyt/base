@@ -13,6 +13,19 @@
 - (CV) 常量
 - -> 别名
 
+### v0.5.11
+
+部分函数添加警告
+
+新增
+
+- `createUploader` 支持二进制上传,支持配置 `headersHandler`
+- (D) utils
+  - (F) sleep
+  - (F) asyncReplace
+  - (F) memoize
+  - (F) deepClone
+
 ### v0.5.10
 
 全局添加可控警告

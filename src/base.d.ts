@@ -45,3 +45,5 @@ type TObject<T> = Record<string | symbol | number, T>;
 type TArrayItem<T> = T extends [...infer R] ? R : T;
 
 type TUnwrapPromise<T> = T extends Promise<infer R> ? R : T;
+
+type TOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;

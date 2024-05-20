@@ -92,3 +92,67 @@ export function generateClassName(...args) {
  * @alias generateClassName
  */
 export const gc = generateClassName;
+
+/**
+ * @param {string} str
+ * @param {string|RegExp} pattern
+ * @param {(matchString:string, ...args:string[])=>string|Promise<string>} replacer
+ * @returns {Promise<string>}
+ */
+function _replaceOne(str, pattern, replacer) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      pattern = new RegExp(pattern);
+      const match = str.match(pattern);
+      if (!match) {
+        resolve(str);
+        return;
+      }
+      const repStr = await replacer.apply(null, match);
+      resolve(str.replace(pattern, repStr));
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+/**
+ * @param {string} str
+ * @param {string|RegExp} pattern
+ * @param {((matchString:string, ...args:string[])=>string|Promise<string>)|string} replacer
+ * @returns {Promise<string>}
+ */
+export async function asyncReplace(str, pattern, replacer) {
+  if (typeof replacer === 'string') return str.replace(pattern, replacer);
+  if (typeof replacer !== 'function') {
+    throw new TypeError('replacer 必须是字符串或函数');
+  }
+  if (typeof pattern === 'string') {
+    return _replaceOne(str, pattern, replacer);
+  }
+  if (pattern instanceof RegExp) {
+    if (!pattern.global) {
+      return _replaceOne(str, pattern, replacer);
+    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        let match;
+        let lastIndex = 0;
+        const proms = [];
+        while ((match = pattern.exec(str)) !== null) {
+          const prom = replacer.apply(null, Array.from(match));
+          const midStr = str.slice(lastIndex, match.index);
+          lastIndex = match.index + match[0].length;
+          proms.push(prom, midStr);
+        }
+        const lastStr = str.slice(lastIndex);
+        proms.push(lastStr);
+        const temp = await Promise.all(proms);
+        resolve(temp.join(''));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+  throw new TypeError('pattern 必须是字符串或正则表达式');
+}

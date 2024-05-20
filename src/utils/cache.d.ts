@@ -6,3 +6,8 @@ type TCacheByReturnType<
 export declare function cacheByReturn<F extends () => any>(
   cacheLoad: F
 ): TCacheByReturnType<F>;
+
+export declare function memoize<F extends TAnyFunc>(
+  func: F,
+  resolver: (...args: TArgsType<F>) => any
+): F;

@@ -17,3 +17,11 @@ export declare function generateClassName(
 ): string;
 
 export declare const gc: typeof generateClassName;
+
+export declare function asyncReplace(
+  str: string,
+  pattern: string | RegExp,
+  replacer:
+    | ((match: string, ...args: any[]) => Promise<string> | string)
+    | string
+): Promise<string>;

@@ -17,7 +17,8 @@ import { warning } from '../warning';
  *  retryCount?: number
  *  requestMethod?: 'POST'|'PUT'
  *  headers?: Record<string, string>
- *  bodyHandler?: (data:{ chunk: Blob, chunkIdx: number }) => Record<string,any>;
+ *  headersHandler?: HeadersHandler;
+ *  bodyHandler?: BodyHandler;
  *  requestOptions?: RequestInit
  * }} UploadOptions
  * @typedef {File|Blob|string} FileLive
@@ -69,10 +70,15 @@ import { warning } from '../warning';
  *  chunkIdx: number,
  *  customOption: any,
  * }) => Promise<Record<string,any>>} BodyHandler
+ * @typedef {(data:{
+ *  chunkIdx: number,
+ *  customOption: any,
+ *  currentHeanders: Record<string,any>
+ * }) => Promise<Record<string,any>>} HeadersHandler
  */
 
 // 允许的上传请求体格式
-const ALLOWED_DATA_TYPES = ['FormData'];
+const ALLOWED_DATA_TYPES = ['FormData', 'binary'];
 
 // 允许的返回体格式
 const ALLOWED_RESPONSE_TYPES = ['json', 'string'];
@@ -85,7 +91,7 @@ const ALLOWED_CONCURRENT_NODES = ['chunk', 'file'];
 
 /**
  * @param {string} key
- * @param {string} type
+ * @param {string|string[]} type
  * @param {any} value
  * @param {any} defaultValue
  * @param {any[]} allowedTypes
@@ -93,7 +99,9 @@ const ALLOWED_CONCURRENT_NODES = ['chunk', 'file'];
 function cast(key, type, value, defaultValue, allowedTypes = null) {
   if (
     // 类型判断
-    getType(value) !== type ||
+    (Array.isArray(type)
+      ? !type.includes(getType(value))
+      : getType(value) !== type) ||
     // 允许值判断
     (allowedTypes && !allowedTypes.includes(value))
   ) {
@@ -114,18 +122,26 @@ function normalizeOptions(options) {
     throw new TypeError('options.url 必须是非空字符串');
   const {
     url,
-    maxConcurrent = 3,
-    concurrentNode = 'chunk',
-    chunkSize = 1024 * 1024,
-    dataType = 'FormData',
-    dataKey = 'file',
-    responseType = 'json',
-    retryCount = 0,
-    requestMethod = 'POST',
-    headers = {},
-    bodyHandler = () => {},
-    requestOptions = {},
+    maxConcurrent,
+    concurrentNode,
+    chunkSize,
+    dataType,
+    dataKey,
+    responseType,
+    retryCount,
+    requestMethod,
+    headers,
+    headersHandler,
+    bodyHandler,
+    requestOptions,
   } = options;
+  const _dataType = cast(
+    'dataType',
+    'string',
+    dataType,
+    'FormData',
+    ALLOWED_DATA_TYPES
+  );
   const normalizedOptions = {
     url,
     maxConcurrent: cast('maxConcurrent', 'number', maxConcurrent, 3),
@@ -137,13 +153,7 @@ function normalizeOptions(options) {
       ALLOWED_CONCURRENT_NODES
     ),
     chunkSize: cast('chunkSize', 'number', chunkSize, 1024 * 512),
-    dataType: cast(
-      'dataType',
-      'string',
-      dataType,
-      'FormData',
-      ALLOWED_DATA_TYPES
-    ),
+    dataType: _dataType,
     dataKey: cast('dataKey', 'string', dataKey, 'file'),
     responseType: cast(
       'responseType',
@@ -160,10 +170,27 @@ function normalizeOptions(options) {
       'POST',
       ALLOWED_REQUEST_METHODS
     ),
-    headers: cast('headers', 'object', headers, {}),
-    bodyHandler: cast('bodyHandler', 'function', bodyHandler, () => {}),
+    headers: cast('headers', 'object', headers, {
+      'Content-Type':
+        _dataType === 'FormData'
+          ? 'multipart/form-data'
+          : 'application/octet-stream',
+    }),
+    headersHandler: cast(
+      'headersHandler',
+      ['function', 'asyncfunction'],
+      headersHandler,
+      () => {}
+    ),
+    bodyHandler: cast(
+      'bodyHandler',
+      ['function', 'asyncfunction'],
+      bodyHandler,
+      () => {}
+    ),
     requestOptions: cast('requestOptions', 'object', requestOptions, {}),
   };
+  console.log(normalizedOptions);
   return normalizedOptions;
 }
 
@@ -240,6 +267,9 @@ const uploadWorkerFunc = async ({
       uploadInfo,
     });
   };
+  /** @type {HeadersHandler} */
+  // @ts-ignore
+  const _userHeadersHandler = userHeadersHandler || (() => {});
   /** @type {BodyHandler} */
   // @ts-ignore
   const _userBodyHandler = userBodyHandler || (() => {});
@@ -262,18 +292,39 @@ const uploadWorkerFunc = async ({
     }
     return formData;
   };
+  const binaryBodyHandler = async (idx) => {
+    const chunk = getChunkData(idx);
+    return chunk;
+  };
   // 请求体处理
   /** @param {number} idx */
   const bodyHandler = async (idx) => {
     if (dataType === 'FormData') {
       return formDataBodyHandler(idx);
+    } else if (dataType === 'binary') {
+      return binaryBodyHandler(idx);
     }
+  };
+  // 请求头处理
+  /** @param {number} idx */
+  const heandersHandler = async (idx) => {
+    const extendHeaders = await _userHeadersHandler({
+      chunkIdx: idx,
+      currentHeanders: headers,
+      customOption: uploadInfo.customOption,
+    });
+    return {
+      ...headers,
+      ...extendHeaders,
+    };
   };
   // 实际上传
   /** @param {number[]} chunkIdxs */
   const run = async (chunkIdxs) => {
     for (const idx of chunkIdxs) {
       const body = await bodyHandler(idx);
+      const headers = await heandersHandler(idx);
+      console.log('run', headers);
       await fetch(serverPath, {
         ...requestOptions,
         method: requestMethod,
@@ -339,14 +390,17 @@ function formatFuncString(funcString) {
 
 /**
  * @param {{
- *  bodyHandler: (body: { chunk: Blob, chunkIdx: number }) => Record<string,any>;
+ *  bodyHandler: BodyHandler;
+ * headersHandler: HeadersHandler;
  * }} options
  * @returns
  */
-function workerUtilsGenerate({ bodyHandler }) {
+function workerUtilsGenerate({ bodyHandler, headersHandler }) {
   const bodyHandlerStr = formatFuncString(bodyHandler?.toString());
+  const headersHandlerStr = formatFuncString(headersHandler?.toString());
   return createLinkByString(`
     ${bodyHandler ? `const userBodyHandler = ${bodyHandlerStr};` : ''}
+    ${headersHandler ? `const userHeadersHandler = ${headersHandlerStr};` : ''}
   `);
 }
 
@@ -395,13 +449,16 @@ class UploadController {
     this.#_responseType = options.responseType;
     this.#_retryCount = options.retryCount;
     this.#_requestMethod = options.requestMethod;
-    const bodyHandler = options.bodyHandler;
+    const { bodyHandler, headersHandler } = options;
 
     this.#_originOptions = options;
     this.#_uploadQueue = [];
     this.#_status = UPLOAD_CONTROLLER_STATUS.waiting;
     this.#_finishInfoMap = {};
-    const workerUtilsLink = workerUtilsGenerate({ bodyHandler });
+    const workerUtilsLink = workerUtilsGenerate({
+      bodyHandler,
+      headersHandler,
+    });
     this.#_uploadWorkerPool = createPool(
       () =>
         createWorkerFunc(uploadWorkerFunc, [workerUtilsLink], { reuse: false }),

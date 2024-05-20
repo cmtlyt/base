@@ -1,41 +1,49 @@
-import { chunkTask, apply, isAsyncFunc } from './dist';
+import { asyncReplace, sleep } from './src';
 
-console.log(isAsyncFunc(async () => {})); // true
-console.log(isAsyncFunc(() => {})); // false
-console.log(isAsyncFunc(async function () {})); // true
+asyncReplace('123', /\d/g, async (...args) => {
+  console.log(args);
+  await sleep(1000);
+  return '2';
+}).then(console.log);
 
-// @ts-ignore
-window.__ClConfig__.disableWarning = true;
+// import { chunkTask, apply, isAsyncFunc } from './dist';
 
-console.log(isAsyncFunc(function () {})); // false
-console.log(isAsyncFunc(class {})); // false
-console.log(isAsyncFunc(Promise.resolve())); // false
-console.log(isAsyncFunc({ then() {} })); // false
+// console.log(isAsyncFunc(async () => {})); // true
+// console.log(isAsyncFunc(() => {})); // false
+// console.log(isAsyncFunc(async function () {})); // true
 
-const run = chunkTask<number>((i) => {
-  const dom = document.createElement('div');
-  dom.innerHTML = i.toString();
-  document.body.prepend(dom);
-  return Promise.resolve(i);
-});
+// // @ts-ignore
+// window.__ClConfig__.disableWarning = true;
 
-console.time('run chunk task');
-run<number[]>(Array.from({ length: 100 }, (_, i) => i + Math.random())).then(
-  (res) => {
-    console.timeEnd('run chunk task');
-    console.log(res);
-  }
-);
+// console.log(isAsyncFunc(function () {})); // false
+// console.log(isAsyncFunc(class {})); // false
+// console.log(isAsyncFunc(Promise.resolve())); // false
+// console.log(isAsyncFunc({ then() {} })); // false
 
-const num = apply(
-  function (a, b, c, d) {
-    return a + b + c + d + this.e;
-  },
-  { e: 5 },
-  [1, 2, 3, 4]
-);
+// const run = chunkTask<number>((i) => {
+//   const dom = document.createElement('div');
+//   dom.innerHTML = i.toString();
+//   document.body.prepend(dom);
+//   return Promise.resolve(i);
+// });
 
-console.log(num);
+// console.time('run chunk task');
+// run<number[]>(Array.from({ length: 100 }, (_, i) => i + Math.random())).then(
+//   (res) => {
+//     console.timeEnd('run chunk task');
+//     console.log(res);
+//   }
+// );
+
+// const num = apply(
+//   function (a, b, c, d) {
+//     return a + b + c + d + this.e;
+//   },
+//   { e: 5 },
+//   [1, 2, 3, 4]
+// );
+
+// console.log(num);
 
 // import { getCallStack } from './dist';
 
@@ -140,24 +148,30 @@ console.log(num);
 //   getRandomString,
 // } from './src';
 
-// const { run } = createWorkerFunc(
-//   (a, p: number, ...c: string[]) => {
-//     console.log(a, p, c);
-//   },
-//   [],
-//   {
-//     needPost: true,
-//   }
-// );
+// // const { run } = createWorkerFunc(
+// //   (a, p: number, ...c: string[]) => {
+// //     console.log(a, p, c);
+// //   },
+// //   [],
+// //   {
+// //     needPost: true,
+// //   }
+// // );
 
-// run(1);
+// // run(1);
 
 // const uploader = createUploader({
-//   url: 'http://localhost:3000/upload',
+//   url: 'http://localhost:3000/binary',
 //   chunkSize: 3,
 //   maxConcurrent: 2,
-//   concurrentNode: 'file',
-//   retryCount: 2,
+//   concurrentNode: 'chunk',
+//   retryCount: 0,
+//   dataType: 'binary',
+//   responseType: 'string',
+//   headersHandler(body) {
+//     // console.log(body);
+//     return { test: 1 };
+//   },
 //   async bodyHandler({ chunk, chunkIdx, customOption }) {
 //     console.log(chunkIdx, chunk, await chunk.text(), customOption);
 //     return {
@@ -169,7 +183,9 @@ console.log(num);
 // for (let i = 0; i < 4; ++i) {
 //   uploader
 //     .upload(createLinkByString(`测试测试测试`), {
-//       onProgress: (e) => {},
+//       onProgress: (e) => {
+//         console.log(e);
+//       },
 //       customOption: {
 //         randomId: getRandomString(),
 //       },

@@ -70,6 +70,7 @@ export function isEmpty(value) {
  * @returns {boolean}
  */
 export const isFile = cacheByReturn(() => {
+  warning('只测试过非嵌套页面, 使用 iframe 嵌套的页面存在一定风险');
   if (!File) return false;
   if (File.prototype.isPrototypeOf) {
     return (value) => File.prototype.isPrototypeOf(value);
@@ -82,6 +83,7 @@ export const isFile = cacheByReturn(() => {
  * @returns {boolean}
  */
 export const isBlob = cacheByReturn(() => {
+  warning('只测试过非嵌套页面, 使用 iframe 嵌套的页面存在一定风险');
   if (!Blob) return false;
   if (Blob.prototype.isPrototypeOf) {
     return (value) => Blob.prototype.isPrototypeOf(value);
@@ -98,6 +100,15 @@ export function isHttpUrlString(value) {
     typeof value === 'string' &&
     (/^https?:\/\//.test(value) || /^\/\//.test(value))
   );
+}
+
+/**
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function isHttpsUrlString(value) {
+  if (/^\/\//.test(value)) value = new URL(value).href;
+  return typeof value === 'string' && /^https:\/\//.test(value);
 }
 
 /**
@@ -121,6 +132,7 @@ export function isDataUrlString(value) {
  * @returns {boolean}
  */
 export function isUrl(value) {
+  warning('只测试过非嵌套页面, 使用 iframe 嵌套的页面存在一定风险');
   return (
     value instanceof URL ||
     isHttpUrlString(value) ||

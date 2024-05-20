@@ -1,3 +1,4 @@
+import { isHttpsUrlString } from '../utils';
 import { cacheByReturn } from '../utils/cache';
 import { warning } from '../warning';
 
@@ -19,14 +20,20 @@ const hasPasteCommand = cacheByReturn(() => {
  * @returns {boolean}
  */
 const isCopyable = cacheByReturn(() => {
-  return !!navigator.clipboard?.writeText || hasCopyCommand() || false;
+  return (
+    isHttpsUrlString() &&
+    (!!navigator.clipboard?.writeText || hasCopyCommand() || false)
+  );
 });
 
 /**
  * @returns {boolean}
  */
 const isPasteable = cacheByReturn(() => {
-  return !!navigator.clipboard?.readText || hasPasteCommand() || false;
+  return (
+    isHttpsUrlString() &&
+    (!!navigator.clipboard?.readText || hasPasteCommand() || false)
+  );
 });
 
 /**

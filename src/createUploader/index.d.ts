@@ -3,7 +3,7 @@ interface IUploadControllerOptions {
   maxConcurrent?: number;
   concurrentNode?: 'chunk' | 'file';
   chunkSize?: number;
-  dataType?: 'FormData';
+  dataType?: 'FormData' | 'binary';
   dataKey?: string;
   responseType?: 'json' | 'string';
   retryCount?: number;
@@ -13,11 +13,19 @@ interface IUploadControllerOptions {
   /**
    * # 禁止使用闭包！！！
    */
+  headersHandler?: (body: {
+    chunkIdx: number;
+    currentHeanders: Record<string, any>;
+    customOption: any;
+  }) => Record<string, any> | Promise<Record<string, any>>;
+  /**
+   * # 禁止使用闭包！！！
+   */
   bodyHandler?: (body: {
     chunk: Blob;
     chunkIdx: number;
     customOption: any;
-  }) => Record<string, any>;
+  }) => Record<string, any> | Promise<Record<string, any>>;
 }
 
 interface IUploadFinishInfo {

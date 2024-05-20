@@ -139,3 +139,10 @@ export function chunkTask(task) {
     });
   };
 }
+
+/**
+ * @param {number} time
+ * @returns {Promise<void>}
+ */
+export const sleep = (time) =>
+  new Promise((resolve) => setTimeout(resolve, time));
