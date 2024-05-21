@@ -18,30 +18,30 @@ type TGetRequired<T> = Omit<
   }>
 >;
 
-type TDeepMerge<T, U> = TGetRequired<{
+type TMerge<T, U> = TGetRequired<{
   [P in keyof T | keyof U]: P extends keyof T
     ? P extends keyof TGetRequired<T>
       ? T[P]
       : P extends keyof U
       ? U[P]
-      : never
+      : T[P]
     : P extends keyof U
     ? U[P]
     : never;
 }>;
 
-type TDeepMergeList<T extends any[]> = T extends [infer H, ...infer R]
+type TMergeList<T extends any[]> = T extends [infer H, ...infer R]
   ? R extends [infer I]
-    ? TDeepMerge<H, I>
-    : TDeepMerge<H, TDeepMergeList<R>>
+    ? TMerge<H, I>
+    : TMerge<H, TMergeList<R>>
   : T['0'];
 
 export declare function merge<T, S extends any[]>(
   target: T,
   ...source: S
-): TDeepMergeList<[T, ...S]>;
+): TMergeList<[T, ...S]>;
 
 export declare function cloneMerge<T, S extends any[]>(
   target: T,
   ...source: S
-): TDeepMergeList<[T, ...S]>;
+): TMergeList<[T, ...S]>;

@@ -9,10 +9,11 @@ interface AvatarProps {
 
 const props: AvatarProps = { src: '' };
 
-const { src, alt, width, height } = merge(props, {
+const { src, alt, width, height, obj } = merge(props, {
   alt: 'avatar',
   width: '4rem',
   height: '4rem',
+  obj: { src: '', alt: '' } as AvatarProps,
 });
 
 // console.log(a, b, a === b);
