@@ -1,8 +1,19 @@
-// import { merge, cloneMerge } from './src';
+import { merge, cloneMerge } from './src';
 
-// const a = {};
+interface AvatarProps {
+  src: string;
+  alt?: string;
+  width?: string;
+  height?: string;
+}
 
-// const b = merge(a, { b: 1 }, { c: 2 }, { d: { e: 1, f: [1, 2, 4, { g: 5 }] } });
+const props: AvatarProps = { src: '' };
+
+const { src, alt, width, height } = merge(props, {
+  alt: 'avatar',
+  width: '4rem',
+  height: '4rem',
+});
 
 // console.log(a, b, a === b);
 
