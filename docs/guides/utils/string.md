@@ -106,7 +106,7 @@ console.log(cookieInfo); // "expires=Fri, 25 Dec 2023 00:00:00 GMT;domain=exampl
 
 ```ts
 function generateClassName(
-  ...args: (string | string[] | Record<string, boolean>)[]
+  ...args: (string | string[] | Record<string, boolean>|Record<string, boolean>[](string|Record<string, boolean>)[])[]
 ): string;
 
 const gc: typeof generateClassName;
@@ -114,9 +114,9 @@ const gc: typeof generateClassName;
 
 **参数**
 
-| 必填 | 参数 | 说明 | 类型                                        | 默认值 |
-| :--: | ---- | ---- | ------------------------------------------- | ------ |
-|  \*  | args | 类名 | string\|string\[]\|Record\<string, boolean> | -      |
+| 必填 | 参数 | 说明 | 类型                                                                                                              | 默认值 |
+| :--: | ---- | ---- | ----------------------------------------------------------------------------------------------------------------- | ------ |
+|  \*  | args | 类名 | (string\|string\[]\|Record\<string, boolean>\|Record\<string, boolean>[]\|(string\|Record\<string, boolean>)[])[] | -      |
 
 **返回值**: `string`
 
