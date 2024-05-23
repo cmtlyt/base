@@ -21,6 +21,7 @@
     "build:doc": "rspress build",
     "preview": "rspress preview",
     "postversion": "npm run build",
+    "prepublishCheck": "git push",
     "test": "vite . --port 8888"
   },
   "keywords": [
