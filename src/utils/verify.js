@@ -136,6 +136,7 @@ export function isUrl(value) {
   return (
     value instanceof URL ||
     isHttpUrlString(value) ||
+    isHttpsUrlString(value) ||
     isBlobUrlString(value) ||
     isDataUrlString(value)
   );
